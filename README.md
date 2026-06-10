@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Onur Macit — Portfolio
 
-## Getting Started
+Minimal, iki dilli (EN/TR) kişisel portfolio/CV sitesi. Next.js + Tailwind CSS ile geliştirildi.
 
-First, run the development server:
+## Çalıştırma
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tarayıcıda [http://localhost:3000](http://localhost:3000) adresini aç.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## İçeriği Düzenleme
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Sitedeki **tüm metinler tek bir dosyada**: [`lib/content.ts`](lib/content.ts)
 
-## Learn More
+- İsim, ünvan, tanıtım yazısı → `hero`
+- Hakkımda paragrafları → `about`
+- İş deneyimleri → `experience.items`
+- Projeler → `projects.items`
+- Yetenekler → `skills.groups`
+- E-posta ve sosyal linkler → `contact`
 
-To learn more about Next.js, take a look at the following resources:
+Hem `en` hem `tr` bölümlerini güncellemeyi unutma.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tasarımı Özelleştirme
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Renkler ve fontlar [`app/globals.css`](app/globals.css) içindeki `:root` değişkenlerinde:
 
-## Deploy on Vercel
+- `--accent` — vurgu rengi
+- `--background` / `--foreground` — zemin ve metin renkleri
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+En kolayı [Vercel](https://vercel.com): repoyu GitHub'a pushlayıp Vercel'e bağlaman yeterli.
+
+```bash
+npm run build
+```
