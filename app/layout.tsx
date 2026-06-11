@@ -15,9 +15,30 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Onur Macit — Software Engineer",
+  title: "Onur Macit — Backend Developer",
   description:
-    "Portfolio of Onur Macit, a software engineer building reliable, thoughtfully crafted software.",
+    "Backend developer building production systems that scale — multi-tenant SaaS, async pipelines, and high-performance APIs with Go and Python.",
+  metadataBase: new URL("https://onurmacit.dev"),
+  openGraph: {
+    title: "Onur Macit — Backend Developer",
+    description:
+      "Backend developer building production systems that scale — multi-tenant SaaS, async pipelines, and high-performance APIs.",
+    url: "https://onurmacit.dev",
+    siteName: "Onur Macit",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Onur Macit — Backend Developer",
+    description:
+      "Backend developer building production systems that scale.",
+    creator: "@onurmaciit",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

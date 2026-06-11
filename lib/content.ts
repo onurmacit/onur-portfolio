@@ -21,6 +21,12 @@ export interface Project {
   github?: string;
 }
 
+export interface Education {
+  degree: string;
+  school: string;
+  period: string;
+}
+
 export interface Content {
   nav: { about: string; experience: string; projects: string; skills: string; contact: string };
   hero: {
@@ -31,9 +37,11 @@ export interface Content {
     availability: string;
     cta: string;
     ctaSecondary: string;
+    ctaResume: string;
   };
   about: { heading: string; paragraphs: string[] };
   experience: { heading: string; items: Experience[] };
+  education: { heading: string; items: Education[] };
   projects: { heading: string; viewProject: string; items: Project[] };
   skills: { heading: string; groups: { label: string; items: string[] }[] };
   contact: {
@@ -57,12 +65,13 @@ export const content: Record<Lang, Content> = {
     hero: {
       greeting: "Hello, I'm",
       name: "Onur Macit",
-      title: "Backend Engineer",
+      title: "Backend Developer",
       intro:
         "I design and build production backend systems that scale — multi-tenant SaaS architectures, async job pipelines, and APIs serving thousands of requests with sub-100ms response times.",
       availability: "Open to new opportunities",
       cta: "Get in touch",
       ctaSecondary: "See my work",
+      ctaResume: "Resume ↓",
     },
     about: {
       heading: "About",
@@ -75,7 +84,7 @@ export const content: Record<Lang, Content> = {
       heading: "Experience",
       items: [
         {
-          role: "Backend Engineer",
+          role: "Backend Developer",
           company: "Vyrin Lab",
           period: "2024 — Present",
           summary:
@@ -89,6 +98,16 @@ export const content: Record<Lang, Content> = {
           summary:
             "Delivered production websites for SMB clients. Built Korkmaz Elektrik's site with Next.js 15 — achieved 98/100 Lighthouse performance score through static generation, image optimization, and edge caching. Reduced client's customer inquiry response time by integrating an automated contact pipeline.",
           stack: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
+        },
+      ],
+    },
+    education: {
+      heading: "Education",
+      items: [
+        {
+          degree: "Computer Programming",
+          school: "Karadeniz Technical University",
+          period: "2020 — 2024",
         },
       ],
     },
@@ -151,7 +170,10 @@ export const content: Record<Lang, Content> = {
       email: "onurmaciit@gmail.com",
       links: [
         { label: "GitHub", url: "https://github.com/onurmacit" },
-        { label: "LinkedIn", url: "https://linkedin.com/in/onurmacit" },
+        { label: "LinkedIn", url: "https://www.linkedin.com/in/onur-macit-b42a19223/" },
+        { label: "Medium", url: "https://medium.com/@onurmaciit" },
+        { label: "X", url: "https://x.com/onurmaciit" },
+        { label: "Instagram", url: "https://www.instagram.com/onuurmacit/" },
       ],
     },
     footer: "Designed & built by Onur Macit",
@@ -168,12 +190,13 @@ export const content: Record<Lang, Content> = {
     hero: {
       greeting: "Merhaba, ben",
       name: "Onur Macit",
-      title: "Backend Engineer",
+      title: "Backend Developer",
       intro:
         "Ölçeklenen production backend sistemleri tasarlıyorum — multi-tenant SaaS mimarileri, asenkron iş pipeline'ları ve sub-100ms yanıt süreleriyle binlerce isteğe hizmet veren API'lar.",
       availability: "Yeni fırsatlara açığım",
       cta: "İletişime geç",
       ctaSecondary: "Çalışmalarımı gör",
+      ctaResume: "CV ↓",
     },
     about: {
       heading: "Hakkımda",
@@ -186,7 +209,7 @@ export const content: Record<Lang, Content> = {
       heading: "Deneyim",
       items: [
         {
-          role: "Backend Engineer",
+          role: "Backend Developer",
           company: "Vyrin Lab",
           period: "2024 — Günümüz",
           summary:
@@ -200,6 +223,16 @@ export const content: Record<Lang, Content> = {
           summary:
             "KOBİ müşterilere production web siteleri teslim ettim. Korkmaz Elektrik sitesini Next.js 15 ile geliştirdim — statik üretim, görsel optimizasyonu ve edge caching ile Lighthouse performans puanı 98/100. Otomatik iletişim pipeline'ı entegre ederek müşteri yanıt süresini kısalttım.",
           stack: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
+        },
+      ],
+    },
+    education: {
+      heading: "Eğitim",
+      items: [
+        {
+          degree: "Bilgisayar Programcılığı",
+          school: "Karadeniz Teknik Üniversitesi",
+          period: "2020 — 2024",
         },
       ],
     },
@@ -262,7 +295,10 @@ export const content: Record<Lang, Content> = {
       email: "onurmaciit@gmail.com",
       links: [
         { label: "GitHub", url: "https://github.com/onurmacit" },
-        { label: "LinkedIn", url: "https://linkedin.com/in/onurmacit" },
+        { label: "LinkedIn", url: "https://www.linkedin.com/in/onur-macit-b42a19223/" },
+        { label: "Medium", url: "https://medium.com/@onurmaciit" },
+        { label: "X", url: "https://x.com/onurmaciit" },
+        { label: "Instagram", url: "https://www.instagram.com/onuurmacit/" },
       ],
     },
     footer: "Onur Macit tarafından tasarlandı ve geliştirildi",

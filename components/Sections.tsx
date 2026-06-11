@@ -47,6 +47,14 @@ export function Hero() {
           >
             {t.hero.ctaSecondary}
           </a>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-line px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+          >
+            {t.hero.ctaResume}
+          </a>
         </div>
       </Reveal>
     </section>
@@ -106,12 +114,36 @@ export function Experience() {
   );
 }
 
+export function Education() {
+  const { t } = useLanguage();
+  return (
+    <section id="education" className="mx-auto max-w-3xl px-6 py-24">
+      <Reveal>
+        <SectionHeading number="03" title={t.education.heading} />
+      </Reveal>
+      {t.education.items.map((item, i) => (
+        <Reveal key={i} delay={i * 100}>
+          <div className="flex items-baseline justify-between gap-4">
+            <div>
+              <h3 className="font-serif text-xl font-medium">{item.degree}</h3>
+              <p className="mt-1 text-muted">{item.school}</p>
+            </div>
+            <p className="shrink-0 text-xs font-medium uppercase tracking-widest text-subtle">
+              {item.period}
+            </p>
+          </div>
+        </Reveal>
+      ))}
+    </section>
+  );
+}
+
 export function Projects() {
   const { t } = useLanguage();
   return (
     <section id="projects" className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
-        <SectionHeading number="03" title={t.projects.heading} />
+        <SectionHeading number="04" title={t.projects.heading} />
       </Reveal>
       <div className="grid gap-5 sm:grid-cols-2">
         {t.projects.items.map((project, i) => {
@@ -152,7 +184,7 @@ export function Skills() {
   return (
     <section id="skills" className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
-        <SectionHeading number="04" title={t.skills.heading} />
+        <SectionHeading number="05" title={t.skills.heading} />
       </Reveal>
       <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
         {t.skills.groups.map((group, i) => (
@@ -177,7 +209,7 @@ export function Contact() {
   return (
     <section id="contact" className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
-        <SectionHeading number="05" title={t.contact.heading} />
+        <SectionHeading number="06" title={t.contact.heading} />
       </Reveal>
       <Reveal delay={100}>
         <p className="max-w-xl leading-relaxed text-muted">{t.contact.text}</p>
