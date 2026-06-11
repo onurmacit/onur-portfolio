@@ -67,7 +67,7 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "I design and build production backend systems that scale — multi-tenant SaaS architectures, async job pipelines, and APIs serving thousands of requests with sub-100ms response times.",
+        "I design and build production backend systems that scale — multi-tenant SaaS architectures, async job pipelines, and low-latency APIs serving thousands of requests per day.",
       availability: "Open to new opportunities",
       cta: "Get in touch",
       ctaSecondary: "See my work",
@@ -76,7 +76,7 @@ export const content: Record<Lang, Content> = {
     about: {
       heading: "About",
       paragraphs: [
-        "I'm a backend engineer who thinks in systems. I design APIs not just to work, but to scale gracefully under load, fail predictably, and remain maintainable as teams grow. My focus is on distributed architectures, async processing pipelines, and database performance.",
+        "I'm a backend developer who thinks in systems. I design APIs not just to work, but to scale gracefully under load, fail predictably, and remain maintainable as teams grow. My focus is on distributed architectures, async processing pipelines, and database performance.",
         "I've built multi-tenant SaaS platforms from scratch, designed background job systems processing thousands of tasks daily, and implemented cloud-native media pipelines on AWS. I care deeply about observability, clean separation of concerns, and shipping reliable software.",
       ],
     },
@@ -88,7 +88,7 @@ export const content: Record<Lang, Content> = {
           company: "Vyrin Lab",
           period: "2024 — Present",
           summary:
-            "Sole backend engineer for Apparelte, a fashion social platform. Designed the entire API layer from scratch — 40+ endpoints serving outfit feeds, social interactions, and discovery features. Implemented async media processing pipeline with AWS S3 + Celery that reduced image upload latency by 85% (from 3.2s to 480ms). Built a Redis-cached feed system handling personalized content delivery. Introduced query optimization patterns that cut average DB response from 120ms to 18ms on high-traffic endpoints.",
+            "Sole backend developer for Apparelte, a fashion social platform. Designed the entire API layer from scratch — 40+ endpoints serving outfit feeds, social interactions, and discovery features. Implemented async media processing pipeline with AWS S3 + Celery that reduced image upload latency by 85% (from 3.2s to 480ms). Built a Redis-cached feed system handling personalized content delivery. Introduced query optimization patterns that cut average DB response from 120ms to 18ms on high-traffic endpoints.",
           stack: ["Django", "DRF", "PostgreSQL", "AWS S3", "Redis", "Celery"],
         },
         {
@@ -96,7 +96,7 @@ export const content: Record<Lang, Content> = {
           company: "Self-employed",
           period: "2023 — 2024",
           summary:
-            "Delivered production websites for SMB clients. Built Korkmaz Elektrik's site with Next.js 15 — achieved 98/100 Lighthouse performance score through static generation, image optimization, and edge caching. Reduced client's customer inquiry response time by integrating an automated contact pipeline.",
+            "Delivered production websites for multiple SMB clients across different industries. Built Korkmaz Elektrik's site with Next.js 15 — achieved 98/100 Lighthouse performance score through static generation, image optimization, and edge caching. Developed Albayraklar Oto Servis as a zero-dependency, SEO-optimized site with JSON-LD structured data. Reduced clients' customer inquiry response time by integrating automated contact pipelines.",
           stack: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
         },
       ],
@@ -120,7 +120,7 @@ export const content: Record<Lang, Content> = {
           description:
             "Fashion social platform backend serving 40+ API endpoints. Designed a feed algorithm that ranks outfits by engagement signals, built full-text search with category filtering, and implemented an async media pipeline (S3 + Celery) reducing upload latency by 85%. Multi-layer caching with Redis cut redundant DB queries by 70%.",
           stack: ["Django", "DRF", "PostgreSQL", "AWS S3", "Redis", "Celery", "JWT"],
-          github: "https://github.com/onurmacit",
+          link: "https://apparelte.com/",
         },
         {
           name: "Screenshot API",
@@ -156,7 +156,7 @@ export const content: Record<Lang, Content> = {
     skills: {
       heading: "Skills",
       groups: [
-        { label: "Languages", items: ["Python", "TypeScript", "JavaScript", "C#", "SQL"] },
+        { label: "Languages", items: ["Python", "Go", "TypeScript", "JavaScript", "C#", "SQL"] },
         { label: "Backend & APIs", items: ["Django", "DRF", "FastAPI", "REST API Design", "JWT", "WebSockets"] },
         { label: "Data & Caching", items: ["PostgreSQL", "Redis", "Celery", "Query Optimization", "Alembic"] },
         { label: "Cloud & Infrastructure", items: ["AWS (S3, EC2)", "Docker", "Kubernetes", "CI/CD", "GitHub Actions"] },
@@ -192,7 +192,7 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "Ölçeklenen production backend sistemleri tasarlıyorum — multi-tenant SaaS mimarileri, asenkron iş pipeline'ları ve sub-100ms yanıt süreleriyle binlerce isteğe hizmet veren API'lar.",
+        "Ölçeklenen production backend sistemleri tasarlıyorum — multi-tenant SaaS mimarileri, asenkron iş pipeline'ları ve günde binlerce isteğe hizmet veren düşük gecikmeli API'lar.",
       availability: "Yeni fırsatlara açığım",
       cta: "İletişime geç",
       ctaSecondary: "Çalışmalarımı gör",
@@ -201,7 +201,7 @@ export const content: Record<Lang, Content> = {
     about: {
       heading: "Hakkımda",
       paragraphs: [
-        "Sistemler düşünen bir backend mühendisiyim. API'ları sadece çalışsın diye değil, yük altında zarif şekilde ölçeklensin, öngörülebilir şekilde hata versin ve ekip büyüdükçe bakımı kolay kalsın diye tasarlıyorum. Odak noktam dağıtık mimariler, asenkron işleme pipeline'ları ve veritabanı performansı.",
+        "Sistemler düşünen bir backend developer'ım. API'ları sadece çalışsın diye değil, yük altında zarif şekilde ölçeklensin, öngörülebilir şekilde hata versin ve ekip büyüdükçe bakımı kolay kalsın diye tasarlıyorum. Odak noktam dağıtık mimariler, asenkron işleme pipeline'ları ve veritabanı performansı.",
         "Sıfırdan multi-tenant SaaS platformları kurdum, günlük binlerce görevi işleyen arka plan sistemleri tasarladım ve AWS üzerinde cloud-native medya pipeline'ları uyguladım. Gözlemlenebilirlik, temiz separation of concerns ve güvenilir yazılım teslimi benim için öncelikli.",
       ],
     },
@@ -213,7 +213,7 @@ export const content: Record<Lang, Content> = {
           company: "Vyrin Lab",
           period: "2024 — Günümüz",
           summary:
-            "Apparelte moda sosyal platformunun tek backend mühendisiyim. API katmanının tamamını sıfırdan tasarladım — outfit feed'leri, sosyal etkileşimler ve keşif özellikleri sunan 40+ endpoint. AWS S3 + Celery ile asenkron medya işleme pipeline'ı kurarak resim yükleme gecikmesini %85 azalttım (3.2s'den 480ms'ye). Redis cache'li feed sistemi ile kişiselleştirilmiş içerik dağıtımı sağladım. Sorgu optimizasyonu ile yoğun trafikli endpoint'lerde ortalama DB yanıt süresini 120ms'den 18ms'ye düşürdüm.",
+            "Apparelte moda sosyal platformunun tek backend developer'ıyım. API katmanının tamamını sıfırdan tasarladım — outfit feed'leri, sosyal etkileşimler ve keşif özellikleri sunan 40+ endpoint. AWS S3 + Celery ile asenkron medya işleme pipeline'ı kurarak resim yükleme gecikmesini %85 azalttım (3.2s'den 480ms'ye). Redis cache'li feed sistemi ile kişiselleştirilmiş içerik dağıtımı sağladım. Sorgu optimizasyonu ile yoğun trafikli endpoint'lerde ortalama DB yanıt süresini 120ms'den 18ms'ye düşürdüm.",
           stack: ["Django", "DRF", "PostgreSQL", "AWS S3", "Redis", "Celery"],
         },
         {
@@ -221,7 +221,7 @@ export const content: Record<Lang, Content> = {
           company: "Serbest",
           period: "2023 — 2024",
           summary:
-            "KOBİ müşterilere production web siteleri teslim ettim. Korkmaz Elektrik sitesini Next.js 15 ile geliştirdim — statik üretim, görsel optimizasyonu ve edge caching ile Lighthouse performans puanı 98/100. Otomatik iletişim pipeline'ı entegre ederek müşteri yanıt süresini kısalttım.",
+            "Farklı sektörlerden birden fazla KOBİ müşteriye production web siteleri teslim ettim. Korkmaz Elektrik sitesini Next.js 15 ile geliştirdim — statik üretim, görsel optimizasyonu ve edge caching ile Lighthouse performans puanı 98/100. Albayraklar Oto Servis'i sıfır bağımlılık, JSON-LD structured data ile SEO optimize site olarak geliştirdim. Otomatik iletişim pipeline'ları entegre ederek müşteri yanıt sürelerini kısalttım.",
           stack: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
         },
       ],
@@ -245,7 +245,7 @@ export const content: Record<Lang, Content> = {
           description:
             "40+ API endpoint sunan moda sosyal platform backend'i. Etkileşim sinyallerine göre outfit sıralayan feed algoritması, kategori filtreli full-text arama ve yükleme gecikmesini %85 azaltan asenkron medya pipeline'ı (S3 + Celery) tasarladım. Redis ile çok katmanlı caching gereksiz DB sorgularını %70 azalttı.",
           stack: ["Django", "DRF", "PostgreSQL", "AWS S3", "Redis", "Celery", "JWT"],
-          github: "https://github.com/onurmacit",
+          link: "https://apparelte.com/",
         },
         {
           name: "Screenshot API",
@@ -281,7 +281,7 @@ export const content: Record<Lang, Content> = {
     skills: {
       heading: "Yetenekler",
       groups: [
-        { label: "Diller", items: ["Python", "TypeScript", "JavaScript", "C#", "SQL"] },
+        { label: "Diller", items: ["Python", "Go", "TypeScript", "JavaScript", "C#", "SQL"] },
         { label: "Backend & API", items: ["Django", "DRF", "FastAPI", "REST API Tasarımı", "JWT", "WebSocket"] },
         { label: "Veri & Cache", items: ["PostgreSQL", "Redis", "Celery", "Sorgu Optimizasyonu", "Alembic"] },
         { label: "Bulut & Altyapı", items: ["AWS (S3, EC2)", "Docker", "Kubernetes", "CI/CD", "GitHub Actions"] },
