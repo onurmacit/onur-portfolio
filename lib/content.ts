@@ -125,6 +125,13 @@ export const content: Record<Lang, Content> = {
           stack: ["Next.js 15", "TypeScript", "Tailwind CSS", "Vercel"],
           github: "https://github.com/onurmacit/korkmazelektrik-website",
         },
+        {
+          name: "Albayraklar Oto Servis",
+          description:
+            "Corporate website for an auto repair shop. Built with zero dependencies — pure HTML/CSS/JS. SEO-optimized with JSON-LD structured data and sitemap, accessibility-first with ARIA labels and reduced-motion support. Integrated FormSubmit for lead capture and WhatsApp for instant customer contact.",
+          stack: ["HTML5", "CSS3", "JavaScript", "SEO", "JSON-LD"],
+          github: "https://github.com/onurmacit/arac-tamir-web",
+        },
       ],
     },
     skills: {
@@ -228,6 +235,13 @@ export const content: Record<Lang, Content> = {
             "Lighthouse puanı 98/100 olan iş web sitesi. Anında sayfa yüklemeleri için statik site üretimi, responsive tasarım ve otomatik iletişim formu pipeline'ı. Tasarımdan production'a 2 haftanın altında teslim.",
           stack: ["Next.js 15", "TypeScript", "Tailwind CSS", "Vercel"],
           github: "https://github.com/onurmacit/korkmazelektrik-website",
+        },
+        {
+          name: "Albayraklar Oto Servis",
+          description:
+            "Oto tamir dükkanı için kurumsal web sitesi. Sıfır bağımlılık — saf HTML/CSS/JS. JSON-LD structured data ve sitemap ile SEO optimize, ARIA etiketleri ve reduced-motion desteği ile erişilebilirlik öncelikli. Müşteri yakalama için FormSubmit ve anlık iletişim için WhatsApp entegrasyonu.",
+          stack: ["HTML5", "CSS3", "JavaScript", "SEO", "JSON-LD"],
+          github: "https://github.com/onurmacit/arac-tamir-web",
         },
       ],
     },
