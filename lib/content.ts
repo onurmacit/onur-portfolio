@@ -67,7 +67,7 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "I design and build production backend systems that scale — multi-tenant SaaS architectures, async job pipelines, and low-latency APIs serving thousands of requests per day.",
+        "I design and build production backend systems that scale. Multi-tenant SaaS architectures, async job pipelines, and low-latency APIs serving thousands of requests per day.",
       availability: "Open to new opportunities",
       cta: "Get in touch",
       ctaSecondary: "See my work",
@@ -88,7 +88,7 @@ export const content: Record<Lang, Content> = {
           company: "Vyrin Lab",
           period: "2024 — Present",
           summary:
-            "Sole backend developer for Apparelte, a fashion social platform. Designed the entire API layer from scratch — 40+ endpoints serving outfit feeds, social interactions, and discovery features. Implemented async media processing pipeline with AWS S3 + Celery that reduced image upload latency by 85% (from 3.2s to 480ms). Built a Redis-cached feed system handling personalized content delivery. Introduced query optimization patterns that cut average DB response from 120ms to 18ms on high-traffic endpoints.",
+            "Sole backend developer for Apparelte, a fashion social platform. Designed the entire API layer from scratch with 40+ endpoints serving outfit feeds, social interactions, and discovery features. Implemented async media processing pipeline with AWS S3 + Celery that reduced image upload latency by 85% (from 3.2s to 480ms). Built a Redis-cached feed system handling personalized content delivery. Introduced query optimization patterns that cut average DB response from 120ms to 18ms on high-traffic endpoints.",
           stack: ["Django", "DRF", "PostgreSQL", "AWS S3", "Redis", "Celery"],
         },
         {
@@ -96,7 +96,7 @@ export const content: Record<Lang, Content> = {
           company: "Self-employed",
           period: "2023 — 2024",
           summary:
-            "Delivered production websites for multiple SMB clients across different industries. Built Korkmaz Elektrik's site with Next.js 15 — achieved 98/100 Lighthouse performance score through static generation, image optimization, and edge caching. Developed Albayraklar Oto Servis as a zero-dependency, SEO-optimized site with JSON-LD structured data. Reduced clients' customer inquiry response time by integrating automated contact pipelines.",
+            "Delivered production websites for multiple SMB clients across different industries. Built Korkmaz Elektrik's site with Next.js 15, achieving 98/100 Lighthouse performance score through static generation, image optimization, and edge caching. Developed Albayraklar Oto Servis as a zero-dependency, SEO-optimized site with JSON-LD structured data. Reduced clients' customer inquiry response time by integrating automated contact pipelines.",
           stack: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
         },
       ],
@@ -125,7 +125,7 @@ export const content: Record<Lang, Content> = {
         {
           name: "Screenshot API",
           description:
-            "Production-grade SaaS with microservice architecture. Built a high-performance Go renderer (Fiber + go-rod) replacing Playwright — reduced memory usage from ~200MB to ~50MB idle and eliminated Node.js dependency. Browser pool with round-robin allocation removes cold-start latency (~2s saved per request). Features SSRF protection, network-level ad/tracker blocking, smart element capture with progressive scroll, 4-tier rate limiting, Stripe billing, and S3 storage with CDN.",
+            "Production-grade SaaS with microservice architecture. Built a high-performance Go renderer (Fiber + go-rod) replacing Playwright, reducing memory usage from ~200MB to ~50MB idle and eliminating Node.js dependency. Browser pool with round-robin allocation removes cold-start latency (~2s saved per request). Features SSRF protection, network-level ad/tracker blocking, smart element capture with progressive scroll, 4-tier rate limiting, Stripe billing, and S3 storage with CDN.",
           stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Celery", "Docker", "Stripe"],
           github: "https://github.com/onurmacit/screenshot-api",
           link: "https://screenshot-web-five.vercel.app",
@@ -133,7 +133,7 @@ export const content: Record<Lang, Content> = {
         {
           name: "IMDb Clone",
           description:
-            "Full-stack movie database with CI/CD pipeline. JWT auth with role-based access, Redis caching layer, Cloudinary media integration, and containerized deployment. GitHub Actions pipeline runs automated tests and linting on every PR — zero manual QA required for deploys.",
+            "Full-stack movie database with CI/CD pipeline. JWT auth with role-based access, Redis caching layer, Cloudinary media integration, and containerized deployment. GitHub Actions pipeline runs automated tests and linting on every PR with zero manual QA required for deploys.",
           stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "Docker", "GitHub Actions"],
           github: "https://github.com/onurmacit/imdb-clone-backend",
         },
@@ -142,13 +142,15 @@ export const content: Record<Lang, Content> = {
           description:
             "Business website with 98/100 Lighthouse score. Static site generation for instant page loads, responsive design, and automated contact form pipeline. Delivered from design to production in under 2 weeks.",
           stack: ["Next.js 15", "TypeScript", "Tailwind CSS", "Vercel"],
+          link: "https://korkmazelektrik.tr/",
           github: "https://github.com/onurmacit/korkmazelektrik-website",
         },
         {
           name: "Albayraklar Oto Servis",
           description:
-            "Corporate website for an auto repair shop. Built with zero dependencies — pure HTML/CSS/JS. SEO-optimized with JSON-LD structured data and sitemap, accessibility-first with ARIA labels and reduced-motion support. Integrated FormSubmit for lead capture and WhatsApp for instant customer contact.",
+            "Corporate website for an auto repair shop. Built with zero dependencies using pure HTML/CSS/JS. SEO-optimized with JSON-LD structured data and sitemap, accessibility-first with ARIA labels and reduced-motion support. Integrated FormSubmit for lead capture and WhatsApp for instant customer contact.",
           stack: ["HTML5", "CSS3", "JavaScript", "SEO", "JSON-LD"],
+          link: "https://albayraklarotoservis.com/",
           github: "https://github.com/onurmacit/arac-tamir-web",
         },
       ],
@@ -192,7 +194,7 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "Ölçeklenen production backend sistemleri tasarlıyorum — multi-tenant SaaS mimarileri, asenkron iş pipeline'ları ve günde binlerce isteğe hizmet veren düşük gecikmeli API'lar.",
+        "Ölçeklenen production backend sistemleri tasarlıyorum. Multi-tenant SaaS mimarileri, asenkron iş pipeline'ları ve günde binlerce isteğe hizmet veren düşük gecikmeli API'lar.",
       availability: "Yeni fırsatlara açığım",
       cta: "İletişime geç",
       ctaSecondary: "Çalışmalarımı gör",
@@ -213,7 +215,7 @@ export const content: Record<Lang, Content> = {
           company: "Vyrin Lab",
           period: "2024 — Günümüz",
           summary:
-            "Apparelte moda sosyal platformunun tek backend developer'ıyım. API katmanının tamamını sıfırdan tasarladım — outfit feed'leri, sosyal etkileşimler ve keşif özellikleri sunan 40+ endpoint. AWS S3 + Celery ile asenkron medya işleme pipeline'ı kurarak resim yükleme gecikmesini %85 azalttım (3.2s'den 480ms'ye). Redis cache'li feed sistemi ile kişiselleştirilmiş içerik dağıtımı sağladım. Sorgu optimizasyonu ile yoğun trafikli endpoint'lerde ortalama DB yanıt süresini 120ms'den 18ms'ye düşürdüm.",
+            "Apparelte moda sosyal platformunun tek backend developer'ıyım. API katmanının tamamını sıfırdan tasarladım, outfit feed'leri, sosyal etkileşimler ve keşif özellikleri sunan 40+ endpoint. AWS S3 + Celery ile asenkron medya işleme pipeline'ı kurarak resim yükleme gecikmesini %85 azalttım (3.2s'den 480ms'ye). Redis cache'li feed sistemi ile kişiselleştirilmiş içerik dağıtımı sağladım. Sorgu optimizasyonu ile yoğun trafikli endpoint'lerde ortalama DB yanıt süresini 120ms'den 18ms'ye düşürdüm.",
           stack: ["Django", "DRF", "PostgreSQL", "AWS S3", "Redis", "Celery"],
         },
         {
@@ -221,7 +223,7 @@ export const content: Record<Lang, Content> = {
           company: "Serbest",
           period: "2023 — 2024",
           summary:
-            "Farklı sektörlerden birden fazla KOBİ müşteriye production web siteleri teslim ettim. Korkmaz Elektrik sitesini Next.js 15 ile geliştirdim — statik üretim, görsel optimizasyonu ve edge caching ile Lighthouse performans puanı 98/100. Albayraklar Oto Servis'i sıfır bağımlılık, JSON-LD structured data ile SEO optimize site olarak geliştirdim. Otomatik iletişim pipeline'ları entegre ederek müşteri yanıt sürelerini kısalttım.",
+            "Farklı sektörlerden birden fazla KOBİ müşteriye production web siteleri teslim ettim. Korkmaz Elektrik sitesini Next.js 15 ile geliştirdim, statik üretim, görsel optimizasyonu ve edge caching ile Lighthouse performans puanı 98/100. Albayraklar Oto Servis'i sıfır bağımlılık, JSON-LD structured data ile SEO optimize site olarak geliştirdim. Otomatik iletişim pipeline'ları entegre ederek müşteri yanıt sürelerini kısalttım.",
           stack: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Vercel"],
         },
       ],
@@ -250,7 +252,7 @@ export const content: Record<Lang, Content> = {
         {
           name: "Screenshot API",
           description:
-            "Microservice mimarili production-grade SaaS. Playwright yerine yüksek performanslı Go renderer (Fiber + go-rod) geliştirdim — bellek kullanımını ~200MB'dan ~50MB'a düşürdüm, Node.js bağımlılığını ortadan kaldırdım. Round-robin browser pool ile cold-start gecikmesini elimine ettim (istek başına ~2s tasarruf). SSRF koruması, ağ seviyesinde reklam/tracker engelleme, progresif scroll ile akıllı element yakalama, 4 kademeli rate limiting, Stripe faturalandırma ve CDN'li S3 depolama.",
+            "Microservice mimarili production-grade SaaS. Playwright yerine yüksek performanslı Go renderer (Fiber + go-rod) geliştirdim, bellek kullanımını ~200MB'dan ~50MB'a düşürdüm ve Node.js bağımlılığını ortadan kaldırdım. Round-robin browser pool ile cold-start gecikmesini elimine ettim (istek başına ~2s tasarruf). SSRF koruması, ağ seviyesinde reklam/tracker engelleme, progresif scroll ile akıllı element yakalama, 4 kademeli rate limiting, Stripe faturalandırma ve CDN'li S3 depolama.",
           stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Celery", "Docker", "Stripe"],
           github: "https://github.com/onurmacit/screenshot-api",
           link: "https://screenshot-web-five.vercel.app",
@@ -258,7 +260,7 @@ export const content: Record<Lang, Content> = {
         {
           name: "IMDb Clone",
           description:
-            "CI/CD pipeline'lı full-stack film veritabanı. Rol tabanlı JWT auth, Redis caching katmanı, Cloudinary medya entegrasyonu ve containerize deployment. GitHub Actions pipeline her PR'da otomatik test ve lint çalıştırır — deploy'lar için sıfır manuel QA.",
+            "CI/CD pipeline'lı full-stack film veritabanı. Rol tabanlı JWT auth, Redis caching katmanı, Cloudinary medya entegrasyonu ve containerize deployment. GitHub Actions pipeline her PR'da otomatik test ve lint çalıştırır, deploy'lar için sıfır manuel QA.",
           stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "Docker", "GitHub Actions"],
           github: "https://github.com/onurmacit/imdb-clone-backend",
         },
@@ -267,13 +269,15 @@ export const content: Record<Lang, Content> = {
           description:
             "Lighthouse puanı 98/100 olan iş web sitesi. Anında sayfa yüklemeleri için statik site üretimi, responsive tasarım ve otomatik iletişim formu pipeline'ı. Tasarımdan production'a 2 haftanın altında teslim.",
           stack: ["Next.js 15", "TypeScript", "Tailwind CSS", "Vercel"],
+          link: "https://korkmazelektrik.tr/",
           github: "https://github.com/onurmacit/korkmazelektrik-website",
         },
         {
           name: "Albayraklar Oto Servis",
           description:
-            "Oto tamir dükkanı için kurumsal web sitesi. Sıfır bağımlılık — saf HTML/CSS/JS. JSON-LD structured data ve sitemap ile SEO optimize, ARIA etiketleri ve reduced-motion desteği ile erişilebilirlik öncelikli. Müşteri yakalama için FormSubmit ve anlık iletişim için WhatsApp entegrasyonu.",
+            "Oto tamir dükkanı için kurumsal web sitesi. Sıfır bağımlılık ile saf HTML/CSS/JS. JSON-LD structured data ve sitemap ile SEO optimize, ARIA etiketleri ve reduced-motion desteği ile erişilebilirlik öncelikli. Müşteri yakalama için FormSubmit ve anlık iletişim için WhatsApp entegrasyonu.",
           stack: ["HTML5", "CSS3", "JavaScript", "SEO", "JSON-LD"],
+          link: "https://albayraklarotoservis.com/",
           github: "https://github.com/onurmacit/arac-tamir-web",
         },
       ],
