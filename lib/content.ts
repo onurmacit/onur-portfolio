@@ -57,9 +57,9 @@ export const content: Record<Lang, Content> = {
     hero: {
       greeting: "Hello, I'm",
       name: "Onur Macit",
-      title: "Software Engineer",
+      title: "Backend Developer",
       intro:
-        "I build reliable, thoughtfully crafted software — from clean backend architectures to interfaces people actually enjoy using.",
+        "I build scalable backend systems and REST APIs — from authentication flows and cloud infrastructure to performant database architectures.",
       availability: "Open to new opportunities",
       cta: "Get in touch",
       ctaSecondary: "See my work",
@@ -67,36 +67,28 @@ export const content: Record<Lang, Content> = {
     about: {
       heading: "About",
       paragraphs: [
-        "I'm a software engineer who cares about the details — readable code, sensible architecture, and products that solve real problems. I enjoy working across the stack and learning whatever the problem demands.",
-        "When I'm not coding, I'm usually exploring new tools, contributing to side projects, or reading about software design.",
+        "I'm a backend-focused developer who started with algorithm development and Java, then moved into C# and eventually found my home in Python and Django. I've shipped freelance projects spanning web development, game development, and desktop applications.",
+        "Currently I'm building production backend systems — designing scalable APIs, implementing cloud-based media processing, and optimizing database performance. I care about clean architecture, reliable systems, and writing code that other developers enjoy working with.",
       ],
     },
     experience: {
       heading: "Experience",
       items: [
         {
-          role: "Software Engineer",
-          company: "Acme Corp",
+          role: "Backend Developer",
+          company: "Vyrin Lab",
           period: "2024 — Present",
           summary:
-            "Building and maintaining customer-facing web applications. Led the migration of a legacy monolith to a modular service architecture, cutting deploy times by 60%.",
-          stack: ["TypeScript", "React", "Node.js", "PostgreSQL"],
+            "Leading backend development for Apparelte, a fashion social platform. Built a scalable REST API with JWT authentication, developed core features including outfit feeds, search, and category management. Implemented AWS-backed media processing and Celery background tasks for a smoother user experience.",
+          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery"],
         },
         {
-          role: "Backend Developer",
-          company: "Startup XYZ",
-          period: "2022 — 2024",
+          role: "Freelance Software Developer",
+          company: "Self-employed",
+          period: "2023 — 2024",
           summary:
-            "Designed REST APIs serving 100k+ daily requests. Introduced automated testing and CI pipelines that reduced production incidents significantly.",
-          stack: ["Python", "Django", "Docker", "AWS"],
-        },
-        {
-          role: "Software Engineering Intern",
-          company: "Tech Company",
-          period: "2021 — 2022",
-          summary:
-            "Contributed to internal tooling and dashboards. Shipped features end-to-end under mentorship of senior engineers.",
-          stack: ["JavaScript", "Vue.js", "MySQL"],
+            "Delivered client projects end-to-end. Built the Korkmaz Elektrik website using Next.js 15 with responsive design, static site generation, dynamic content management, and contact form integration.",
+          stack: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
         },
       ],
     },
@@ -105,41 +97,50 @@ export const content: Record<Lang, Content> = {
       viewProject: "View project",
       items: [
         {
-          name: "Project One",
+          name: "Apparelte",
           description:
-            "A full-stack web application that helps teams track and visualize their workflows in real time.",
-          stack: ["Next.js", "TypeScript", "PostgreSQL"],
+            "A fashion social platform where users discover outfits, share styles, and explore trends. I lead the backend — REST API, authentication, feed algorithms, media processing, and search infrastructure.",
+          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery"],
           github: "https://github.com/onurmacit",
         },
         {
-          name: "Project Two",
+          name: "Screenshot API",
           description:
-            "An open-source CLI tool that automates repetitive development tasks with a simple, composable API.",
-          stack: ["Go", "Cobra"],
-          github: "https://github.com/onurmacit",
+            "A SaaS tool that captures high-quality screenshots of any webpage via a simple API. Built the backend service and the Next.js landing page.",
+          stack: ["TypeScript", "Next.js", "Node.js"],
+          github: "https://github.com/onurmacit/screenshot-api",
+          link: "https://github.com/onurmacit/screenshot-web",
         },
         {
-          name: "Project Three",
+          name: "Korkmaz Elektrik",
           description:
-            "A mobile-first app exploring offline-first data sync and local-first architecture patterns.",
-          stack: ["React Native", "SQLite"],
-          github: "https://github.com/onurmacit",
+            "A professional business website for an electrical services company. Responsive design, static site generation for performance, and dynamic content management.",
+          stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+          github: "https://github.com/onurmacit/korkmazelektrik-website",
+        },
+        {
+          name: "IMDb Clone API",
+          description:
+            "A RESTful backend clone of IMDb built with Django. Features include movie/actor CRUD, user reviews, ratings, and token-based authentication.",
+          stack: ["Python", "Django", "DRF", "SQLite"],
+          github: "https://github.com/onurmacit/imdb-clone-backend",
         },
       ],
     },
     skills: {
       heading: "Skills",
       groups: [
-        { label: "Languages", items: ["TypeScript", "JavaScript", "Python", "Go", "SQL"] },
-        { label: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "HTML/CSS"] },
-        { label: "Backend", items: ["Node.js", "Django", "REST APIs", "PostgreSQL", "Redis"] },
-        { label: "Tools", items: ["Git", "Docker", "AWS", "CI/CD", "Linux"] },
+        { label: "Languages", items: ["Python", "TypeScript", "JavaScript", "C#", "SQL"] },
+        { label: "Backend", items: ["Django", "DRF", "REST APIs", "JWT", "Celery", "Firebase"] },
+        { label: "Databases & Caching", items: ["PostgreSQL", "Redis", "Query Optimization"] },
+        { label: "Cloud & DevOps", items: ["AWS", "Docker", "Git", "CI/CD", "Linux"] },
+        { label: "Frontend", items: ["Next.js", "React", "Tailwind CSS", "HTML/CSS"] },
       ],
     },
     contact: {
       heading: "Contact",
-      text: "I'm currently open to new roles and interesting projects. If you'd like to work together or just say hi, my inbox is always open.",
-      email: "onur@example.com",
+      text: "I'm currently open to backend and full-stack roles. If you have an interesting project or opportunity, I'd love to hear about it.",
+      email: "onurmaciit@gmail.com",
       links: [
         { label: "GitHub", url: "https://github.com/onurmacit" },
         { label: "LinkedIn", url: "https://linkedin.com/in/onurmacit" },
@@ -159,9 +160,9 @@ export const content: Record<Lang, Content> = {
     hero: {
       greeting: "Merhaba, ben",
       name: "Onur Macit",
-      title: "Yazılım Mühendisi",
+      title: "Backend Developer",
       intro:
-        "Güvenilir ve özenle tasarlanmış yazılımlar geliştiriyorum — temiz backend mimarilerinden, kullanması keyifli arayüzlere kadar.",
+        "Ölçeklenebilir backend sistemleri ve REST API'lar geliştiriyorum — kimlik doğrulama akışlarından bulut altyapısına, performanslı veritabanı mimarilerine kadar.",
       availability: "Yeni fırsatlara açığım",
       cta: "İletişime geç",
       ctaSecondary: "Çalışmalarımı gör",
@@ -169,36 +170,28 @@ export const content: Record<Lang, Content> = {
     about: {
       heading: "Hakkımda",
       paragraphs: [
-        "Detaylara önem veren bir yazılım mühendisiyim — okunabilir kod, mantıklı mimari ve gerçek problemleri çözen ürünler benim için öncelikli. Full-stack çalışmayı ve problemin gerektirdiği her şeyi öğrenmeyi seviyorum.",
-        "Kod yazmadığım zamanlarda genellikle yeni araçlar keşfediyor, yan projelere katkıda bulunuyor veya yazılım tasarımı üzerine okuyorum.",
+        "Algoritma geliştirme ve Java ile programlamaya başladım, ardından C#'a geçtim ve sonunda Python ve Django'da kendimi buldum. Web geliştirme, oyun geliştirme ve masaüstü uygulama geliştirme alanlarında freelance projeler teslim ettim.",
+        "Şu anda production backend sistemleri geliştiriyorum — ölçeklenebilir API tasarımı, bulut tabanlı medya işleme ve veritabanı performans optimizasyonu üzerine çalışıyorum. Temiz mimari, güvenilir sistemler ve diğer geliştiricilerin çalışmaktan keyif alacağı kod yazmak benim için öncelikli.",
       ],
     },
     experience: {
       heading: "Deneyim",
       items: [
         {
-          role: "Yazılım Mühendisi",
-          company: "Acme Corp",
+          role: "Backend Developer",
+          company: "Vyrin Lab",
           period: "2024 — Günümüz",
           summary:
-            "Müşteriye dönük web uygulamaları geliştiriyorum. Legacy monolitin modüler servis mimarisine taşınmasına liderlik ederek deploy sürelerini %60 kısalttım.",
-          stack: ["TypeScript", "React", "Node.js", "PostgreSQL"],
+            "Apparelte adlı moda sosyal platformunun backend geliştirmesine liderlik ediyorum. JWT kimlik doğrulamalı ölçeklenebilir REST API geliştirdim. Outfit feed'leri, arama ve kategori yönetimi gibi temel özellikleri tasarladım. AWS destekli medya işleme ve Celery arka plan görevleri uyguladım.",
+          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery"],
         },
         {
-          role: "Backend Geliştirici",
-          company: "Startup XYZ",
-          period: "2022 — 2024",
+          role: "Freelance Yazılım Geliştirici",
+          company: "Serbest",
+          period: "2023 — 2024",
           summary:
-            "Günlük 100k+ isteğe hizmet veren REST API'lar tasarladım. Otomatik test ve CI süreçleri kurarak production hatalarını ciddi oranda azalttım.",
-          stack: ["Python", "Django", "Docker", "AWS"],
-        },
-        {
-          role: "Yazılım Mühendisliği Stajyeri",
-          company: "Teknoloji Şirketi",
-          period: "2021 — 2022",
-          summary:
-            "Şirket içi araçlar ve panellere katkıda bulundum. Kıdemli mühendislerin mentorluğunda uçtan uca özellikler geliştirdim.",
-          stack: ["JavaScript", "Vue.js", "MySQL"],
+            "Müşteri projelerini uçtan uca teslim ettim. Korkmaz Elektrik web sitesini Next.js 15 ile responsive tasarım, statik site üretimi, dinamik içerik yönetimi ve iletişim formu entegrasyonu ile geliştirdim.",
+          stack: ["Next.js", "TypeScript", "React", "Tailwind CSS"],
         },
       ],
     },
@@ -207,41 +200,50 @@ export const content: Record<Lang, Content> = {
       viewProject: "Projeyi gör",
       items: [
         {
-          name: "Proje Bir",
+          name: "Apparelte",
           description:
-            "Ekiplerin iş akışlarını gerçek zamanlı takip edip görselleştirmesine yardımcı olan full-stack bir web uygulaması.",
-          stack: ["Next.js", "TypeScript", "PostgreSQL"],
+            "Kullanıcıların kıyafet keşfettiği, stil paylaştığı ve trendleri takip ettiği bir moda sosyal platformu. Backend'e liderlik ediyorum — REST API, kimlik doğrulama, feed algoritmaları, medya işleme ve arama altyapısı.",
+          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery"],
           github: "https://github.com/onurmacit",
         },
         {
-          name: "Proje İki",
+          name: "Screenshot API",
           description:
-            "Tekrarlayan geliştirme görevlerini basit ve esnek bir API ile otomatikleştiren açık kaynak bir CLI aracı.",
-          stack: ["Go", "Cobra"],
-          github: "https://github.com/onurmacit",
+            "Basit bir API ile herhangi bir web sayfasının yüksek kaliteli ekran görüntüsünü yakalayan bir SaaS aracı. Backend servisi ve Next.js landing page'ini geliştirdim.",
+          stack: ["TypeScript", "Next.js", "Node.js"],
+          github: "https://github.com/onurmacit/screenshot-api",
+          link: "https://github.com/onurmacit/screenshot-web",
         },
         {
-          name: "Proje Üç",
+          name: "Korkmaz Elektrik",
           description:
-            "Offline-first veri senkronizasyonu ve local-first mimari desenlerini keşfeden mobil öncelikli bir uygulama.",
-          stack: ["React Native", "SQLite"],
-          github: "https://github.com/onurmacit",
+            "Bir elektrik hizmetleri şirketi için profesyonel iş web sitesi. Responsive tasarım, performans için statik site üretimi ve dinamik içerik yönetimi.",
+          stack: ["Next.js", "TypeScript", "Tailwind CSS"],
+          github: "https://github.com/onurmacit/korkmazelektrik-website",
+        },
+        {
+          name: "IMDb Clone API",
+          description:
+            "Django ile geliştirilmiş IMDb RESTful backend klonu. Film/oyuncu CRUD, kullanıcı yorumları, puanlama ve token tabanlı kimlik doğrulama özellikleri içerir.",
+          stack: ["Python", "Django", "DRF", "SQLite"],
+          github: "https://github.com/onurmacit/imdb-clone-backend",
         },
       ],
     },
     skills: {
       heading: "Yetenekler",
       groups: [
-        { label: "Diller", items: ["TypeScript", "JavaScript", "Python", "Go", "SQL"] },
-        { label: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "HTML/CSS"] },
-        { label: "Backend", items: ["Node.js", "Django", "REST API", "PostgreSQL", "Redis"] },
-        { label: "Araçlar", items: ["Git", "Docker", "AWS", "CI/CD", "Linux"] },
+        { label: "Diller", items: ["Python", "TypeScript", "JavaScript", "C#", "SQL"] },
+        { label: "Backend", items: ["Django", "DRF", "REST API", "JWT", "Celery", "Firebase"] },
+        { label: "Veritabanı & Cache", items: ["PostgreSQL", "Redis", "Sorgu Optimizasyonu"] },
+        { label: "Bulut & DevOps", items: ["AWS", "Docker", "Git", "CI/CD", "Linux"] },
+        { label: "Frontend", items: ["Next.js", "React", "Tailwind CSS", "HTML/CSS"] },
       ],
     },
     contact: {
       heading: "İletişim",
-      text: "Şu anda yeni roller ve ilginç projelere açığım. Birlikte çalışmak ya da sadece merhaba demek istersen, e-postam her zaman açık.",
-      email: "onur@example.com",
+      text: "Şu anda backend ve full-stack rollere açığım. İlginç bir projeniz veya fırsatınız varsa duymak isterim.",
+      email: "onurmaciit@gmail.com",
       links: [
         { label: "GitHub", url: "https://github.com/onurmacit" },
         { label: "LinkedIn", url: "https://linkedin.com/in/onurmacit" },
