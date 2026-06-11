@@ -106,10 +106,10 @@ export const content: Record<Lang, Content> = {
         {
           name: "Screenshot API",
           description:
-            "Production-grade SaaS with multi-tenant architecture. Handles async screenshot/PDF rendering via Playwright, processes jobs through Celery workers scalable to 50+ concurrent renders. Features 4-tier rate limiting, Stripe billing integration, webhook delivery, and S3 storage with CDN. Includes Prometheus metrics, health monitoring, and Kubernetes deployment configs.",
-          stack: ["FastAPI", "Playwright", "PostgreSQL", "Redis", "Celery", "AWS S3", "Docker", "Stripe"],
+            "Production-grade SaaS with microservice architecture. Built a high-performance Go renderer (Fiber + go-rod) replacing Playwright — reduced memory usage from ~200MB to ~50MB idle and eliminated Node.js dependency. Browser pool with round-robin allocation removes cold-start latency (~2s saved per request). Features SSRF protection, network-level ad/tracker blocking, smart element capture with progressive scroll, 4-tier rate limiting, Stripe billing, and S3 storage with CDN.",
+          stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Celery", "Docker", "Stripe"],
           github: "https://github.com/onurmacit/screenshot-api",
-          link: "https://github.com/onurmacit/screenshot-web",
+          link: "https://screenshot-web-five.vercel.app",
         },
         {
           name: "IMDb Clone",
@@ -217,10 +217,10 @@ export const content: Record<Lang, Content> = {
         {
           name: "Screenshot API",
           description:
-            "Multi-tenant mimarili production-grade SaaS. Playwright ile asenkron screenshot/PDF rendering, 50+ eşzamanlı render'a ölçeklenebilen Celery worker'lar. 4 kademeli rate limiting, Stripe faturalandırma, webhook teslimi ve CDN'li S3 depolama. Prometheus metrikleri, sağlık izleme ve Kubernetes deployment konfigürasyonları dahil.",
-          stack: ["FastAPI", "Playwright", "PostgreSQL", "Redis", "Celery", "AWS S3", "Docker", "Stripe"],
+            "Microservice mimarili production-grade SaaS. Playwright yerine yüksek performanslı Go renderer (Fiber + go-rod) geliştirdim — bellek kullanımını ~200MB'dan ~50MB'a düşürdüm, Node.js bağımlılığını ortadan kaldırdım. Round-robin browser pool ile cold-start gecikmesini elimine ettim (istek başına ~2s tasarruf). SSRF koruması, ağ seviyesinde reklam/tracker engelleme, progresif scroll ile akıllı element yakalama, 4 kademeli rate limiting, Stripe faturalandırma ve CDN'li S3 depolama.",
+          stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Celery", "Docker", "Stripe"],
           github: "https://github.com/onurmacit/screenshot-api",
-          link: "https://github.com/onurmacit/screenshot-web",
+          link: "https://screenshot-web-five.vercel.app",
         },
         {
           name: "IMDb Clone",
