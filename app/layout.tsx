@@ -18,12 +18,12 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   title: "Onur Macit — Backend Developer",
   description:
-    "Backend developer building production systems that scale — multi-tenant SaaS, async pipelines, and high-performance APIs with Go and Python.",
+    "Backend developer focused on Django, Go and distributed systems. Production SaaS, async processing, caching strategies, and scalable API design.",
   metadataBase: new URL("https://onurmacit.dev"),
   openGraph: {
     title: "Onur Macit — Backend Developer",
     description:
-      "Backend developer building production systems that scale — multi-tenant SaaS, async pipelines, and high-performance APIs.",
+      "Backend developer focused on Django, Go and distributed systems. Production SaaS with real users.",
     url: "https://onurmacit.dev",
     siteName: "Onur Macit",
     locale: "en_US",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Onur Macit — Backend Developer",
     description:
-      "Backend developer building production systems that scale.",
+      "Backend developer focused on Django, Go and production SaaS.",
     creator: "@onurmaciit",
   },
   robots: {
