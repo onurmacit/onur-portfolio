@@ -7,7 +7,7 @@ import { SectionHeading } from "./SectionHeading";
 export function Hero() {
   const { t } = useLanguage();
   return (
-    <section id="top" className="mx-auto flex min-h-screen max-w-3xl flex-col justify-center px-6 pt-16">
+    <section id="top" className="mx-auto flex min-h-[70vh] max-w-3xl flex-col justify-center px-6 pt-16 pb-8">
       <Reveal>
         <span className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-line bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
           <span className="relative flex h-2 w-2">
@@ -88,7 +88,7 @@ export function Stats() {
 }
 
 export function Featured() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const p = t.featured.project;
   return (
     <section id="featured" className="mx-auto max-w-3xl px-6 py-24">
@@ -103,6 +103,8 @@ export function Featured() {
       <Reveal delay={100}>
         <div className="mt-8 rounded-2xl border border-accent/20 bg-white/70 p-7 sm:p-8">
           <p className="leading-relaxed text-muted">{p.description}</p>
+
+          <ProjectCaseStudy lang={lang} why={p.why} caseStudy={p.caseStudy} />
 
           {p.highlights && (
             <div className="mt-5 flex flex-wrap gap-2">
@@ -134,13 +136,17 @@ export function Featured() {
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            {p.links.map((link) => (
+            {p.links.map((link, i) => (
               <a
                 key={link.label}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-80"
+                className={
+                  i === 0
+                    ? "rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-80"
+                    : "rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+                }
               >
                 {link.label} ↗
               </a>
@@ -198,7 +204,7 @@ export function Experience() {
 }
 
 export function Products() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   return (
     <section id="products" className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
@@ -227,6 +233,7 @@ export function Products() {
                 )}
               </div>
               <p className="mt-4 leading-relaxed text-muted">{product.description}</p>
+              <ProjectCaseStudy lang={lang} why={product.why} caseStudy={product.caseStudy} />
               {product.highlights && (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {product.highlights.map((h) => (
@@ -306,7 +313,10 @@ export function Writing() {
       </Reveal>
       <Reveal delay={100}>
         <p className="max-w-2xl leading-relaxed text-muted">{t.writing.text}</p>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <p className="mt-6 text-xs font-medium uppercase tracking-widest text-subtle">
+          {t.writing.topicsLabel}
+        </p>
+        <div className="mt-3 flex flex-wrap gap-2">
           {t.writing.topics.map((topic) => (
             <Tag key={topic}>{topic}</Tag>
           ))}
@@ -419,6 +429,49 @@ export function Footer() {
         </a>
       </div>
     </footer>
+  );
+}
+
+function ProjectCaseStudy({
+  lang,
+  why,
+  caseStudy,
+}: {
+  lang: "en" | "tr";
+  why?: string;
+  caseStudy?: string[];
+}) {
+  if (!why && !caseStudy?.length) return null;
+
+  const whyLabel = lang === "tr" ? "Neden" : "Why";
+  const caseStudyLabel = lang === "tr" ? "Vaka Çalışması" : "Case Study";
+
+  return (
+    <div className="mt-6 space-y-5">
+      {why && (
+        <div>
+          <p className="mb-2 text-xs font-medium uppercase tracking-widest text-subtle">
+            {whyLabel}
+          </p>
+          <p className="text-sm leading-relaxed text-muted">{why}</p>
+        </div>
+      )}
+      {caseStudy && caseStudy.length > 0 && (
+        <div>
+          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-subtle">
+            {caseStudyLabel}
+          </p>
+          <ul className="space-y-2">
+            {caseStudy.map((item) => (
+              <li key={item} className="flex gap-2 text-sm leading-relaxed text-muted">
+                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   );
 }
 

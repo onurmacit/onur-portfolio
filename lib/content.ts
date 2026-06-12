@@ -17,6 +17,8 @@ export interface Project {
   name: string;
   tagline?: string;
   description: string;
+  why?: string;
+  caseStudy?: string[];
   stack: string[];
   highlights?: string[];
   architecture?: string;
@@ -64,6 +66,7 @@ export interface Content {
   writing: {
     heading: string;
     text: string;
+    topicsLabel: string;
     cta: string;
     url: string;
     topics: string[];
@@ -119,6 +122,13 @@ export const content: Record<Lang, Content> = {
         tagline: "Production SaaS for website screenshots",
         description:
           "Distributed microservice architecture with a FastAPI orchestrator and a dedicated Go rendering engine. Built to handle concurrent screenshot jobs with browser pooling, rate limiting, and Stripe billing.",
+        why:
+          "Started with Playwright in Python but hit memory limits (~200MB per instance) and cold-start latency (~2s per request). Replaced it with a Go renderer (Fiber + go-rod) and a pre-warmed browser pool — eliminated the Node.js dependency and cut idle memory to ~50MB.",
+        caseStudy: [
+          "Problem: Playwright renderer was memory-heavy and incurred a cold-start penalty on every new browser session.",
+          "Decision: Split into FastAPI orchestrator (auth, billing, jobs) + dedicated Go rendering microservice with round-robin browser pool.",
+          "Result: ~75% memory reduction, ~2s saved per request, SSRF protection, 4-tier rate limiting, and Stripe billing integrated.",
+        ],
         highlights: [
           "Go Renderer",
           "Browser Pool",
@@ -144,7 +154,8 @@ S3 + CDN`,
         link: "https://www.screenshotbeam.com/",
         github: "https://github.com/onurmacit/screenshot-api",
         links: [
-          { label: "Live Demo", url: "https://www.screenshotbeam.com/" },
+          { label: "Visit Site", url: "https://www.screenshotbeam.com/" },
+          { label: "View Architecture", url: "https://github.com/onurmacit/screenshot-api" },
           { label: "View Source", url: "https://github.com/onurmacit/screenshot-api" },
         ],
       },
@@ -184,21 +195,30 @@ S3 + CDN`,
           name: "Apparelte",
           tagline: "Fashion social platform · production",
           description:
-            "Sole backend owner for a live social platform. Designed backend architecture, feed caching, async media processing, and API layer serving real users.",
+            "Sole backend owner for a live social platform. Designed backend architecture, engagement-based feed ranking, async media processing, and API layer serving real users.",
+          why:
+            "Built the entire backend solo — from API design to production deployment. The hardest problems were feed performance under load and async media processing without blocking the upload flow.",
+          caseStudy: [
+            "Problem: Image uploads blocked the request cycle (3.2s latency) and feed queries hit the DB on every page load.",
+            "Decision: Offloaded media to Celery + AWS async pipeline; layered Redis cache with engagement-based feed invalidation.",
+            "Result: 85% upload latency reduction (3.2s → 480ms), 70% fewer redundant DB queries, 18ms average response on hot endpoints.",
+          ],
           highlights: [
             "40+ REST endpoints",
+            "Engagement feed algorithm",
             "Redis feed caching",
             "Celery media pipeline",
-            "AWS storage",
           ],
           metric: "85% upload latency reduction · 70% fewer DB queries",
           architecture: `Mobile / Web Client
   ↓
 Django REST API (40+ endpoints)
   ↓
-Redis (feed cache)
+Feed Engine (engagement signals + ranking)
   ↓
-Celery Workers
+Redis (personalized feed cache)
+  ↓
+Celery Workers (async media)
   ↓
 AWS S3 + PostgreSQL`,
           stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery", "JWT"],
@@ -220,8 +240,10 @@ AWS S3 + PostgreSQL`,
     },
     writing: {
       heading: "Writing",
-      text: "I write about backend architecture, performance optimization, and lessons from building production systems.",
-      cta: "Read on Medium",
+      text:
+        "Technical case studies from my production work live on this portfolio. I also explore backend architecture and performance topics on Medium.",
+      topicsLabel: "Topics I explore",
+      cta: "Medium Profile",
       url: "https://medium.com/@onurmaciit",
       topics: [
         "Redis Cache Strategies",
@@ -303,6 +325,13 @@ AWS S3 + PostgreSQL`,
         tagline: "Website screenshot'ları için production SaaS",
         description:
           "FastAPI orchestrator ve Go rendering engine ile dağıtık microservice mimarisi. Browser pooling, rate limiting ve Stripe billing ile concurrent screenshot işleri.",
+        why:
+          "Python Playwright ile başladım ama bellek limitine (~200MB/instance) ve cold-start gecikmesine (~2s/istek) takıldım. Go renderer (Fiber + go-rod) ve pre-warmed browser pool ile değiştirdim — Node.js bağımlılığını kaldırdım, idle belleği ~50MB'a düşürdüm.",
+        caseStudy: [
+          "Problem: Playwright renderer bellek tüketimi yüksekti ve her yeni browser session'da cold-start cezası vardı.",
+          "Karar: FastAPI orchestrator (auth, billing, jobs) + round-robin browser pool'lu Go rendering microservice.",
+          "Sonuç: ~%75 bellek azaltma, istek başına ~2s tasarruf, SSRF koruması, 4 kademeli rate limiting ve Stripe billing.",
+        ],
         highlights: [
           "Go Renderer",
           "Browser Pool",
@@ -328,7 +357,8 @@ S3 + CDN`,
         link: "https://www.screenshotbeam.com/",
         github: "https://github.com/onurmacit/screenshot-api",
         links: [
-          { label: "Canlı Demo", url: "https://www.screenshotbeam.com/" },
+          { label: "Siteyi Gör", url: "https://www.screenshotbeam.com/" },
+          { label: "Mimariyi Gör", url: "https://github.com/onurmacit/screenshot-api" },
           { label: "Kaynak Kod", url: "https://github.com/onurmacit/screenshot-api" },
         ],
       },
@@ -368,21 +398,30 @@ S3 + CDN`,
           name: "Apparelte",
           tagline: "Moda sosyal platform · production",
           description:
-            "Canlı sosyal platformun tek backend sahibi. Backend mimarisi, feed caching, async medya işleme ve gerçek kullanıcılara hizmet veren API katmanı.",
+            "Canlı sosyal platformun tek backend sahibi. Backend mimarisi, etkileşim tabanlı feed sıralama, async medya işleme ve gerçek kullanıcılara hizmet veren API katmanı.",
+          why:
+            "Backend'i tek başıma kurdum — API tasarımından production deploy'a kadar. En zor problemler feed performansı ve upload akışını bloklamadan async medya işleme oldu.",
+          caseStudy: [
+            "Problem: Resim yüklemeleri request cycle'ı blokluyordu (3.2s gecikme) ve feed sorguları her sayfa yüklemesinde DB'ye gidiyordu.",
+            "Karar: Medyayı Celery + AWS async pipeline'a taşıdım; engagement tabanlı feed invalidation ile Redis cache katmanı kurdum.",
+            "Sonuç: %85 upload gecikmesi azaltma (3.2s → 480ms), %70 daha az gereksiz DB sorgusu, hot endpoint'lerde 18ms ortalama yanıt.",
+          ],
           highlights: [
             "40+ REST endpoint",
+            "Engagement feed algoritması",
             "Redis feed cache",
             "Celery medya pipeline",
-            "AWS depolama",
           ],
           metric: "%85 upload gecikmesi azaltma · %70 daha az DB sorgusu",
           architecture: `Mobile / Web Client
   ↓
 Django REST API (40+ endpoint)
   ↓
-Redis (feed cache)
+Feed Engine (engagement signals + ranking)
   ↓
-Celery Workers
+Redis (personalized feed cache)
+  ↓
+Celery Workers (async media)
   ↓
 AWS S3 + PostgreSQL`,
           stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery", "JWT"],
@@ -404,8 +443,10 @@ AWS S3 + PostgreSQL`,
     },
     writing: {
       heading: "Yazılar",
-      text: "Backend mimarisi, performans optimizasyonu ve production sistemlerden çıkardığım dersler hakkında yazıyorum.",
-      cta: "Medium'da oku",
+      text:
+        "Production çalışmalarımdan teknik case study'ler bu portfolyoda. Backend mimarisi ve performans konularını Medium'da da paylaşıyorum.",
+      topicsLabel: "İncelediğim konular",
+      cta: "Medium Profili",
       url: "https://medium.com/@onurmaciit",
       topics: [
         "Redis Cache Stratejileri",
