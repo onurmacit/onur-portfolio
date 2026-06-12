@@ -1,11 +1,14 @@
 import { Nav } from "@/components/Nav";
 import {
   Hero,
-  About,
+  Stats,
+  Featured,
   Experience,
-  Education,
+  Products,
   Projects,
+  Writing,
   Skills,
+  Education,
   Contact,
   Footer,
 } from "@/components/Sections";
@@ -16,11 +19,14 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <About />
+        <Stats />
+        <Featured />
         <Experience />
-        <Education />
+        <Products />
         <Projects />
+        <Writing />
         <Skills />
+        <Education />
         <Contact />
       </main>
       <Footer />

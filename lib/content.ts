@@ -1,6 +1,5 @@
 // ============================================================
 //  EDIT THIS FILE — bütün site içeriği burada.
-//  Kendi bilgilerinle güncelle: isim, deneyim, projeler vs.
 // ============================================================
 
 export type Lang = "en" | "tr";
@@ -9,14 +8,19 @@ export interface Experience {
   role: string;
   company: string;
   period: string;
-  summary: string;
+  context?: string;
+  highlights: string[];
   stack: string[];
 }
 
 export interface Project {
   name: string;
+  tagline?: string;
   description: string;
   stack: string[];
+  highlights?: string[];
+  architecture?: string;
+  metric?: string;
   link?: string;
   github?: string;
 }
@@ -28,21 +32,43 @@ export interface Education {
 }
 
 export interface Content {
-  nav: { about: string; experience: string; projects: string; skills: string; contact: string };
+  nav: {
+    work: string;
+    experience: string;
+    writing: string;
+    skills: string;
+    contact: string;
+  };
   hero: {
     greeting: string;
     name: string;
     title: string;
     intro: string;
+    currentWork: string;
+    focusAreas: string[];
     availability: string;
     cta: string;
     ctaSecondary: string;
     ctaResume: string;
   };
-  about: { heading: string; paragraphs: string[] };
+  stats: { value: string; label: string }[];
+  featured: {
+    label: string;
+    project: Project & {
+      links: { label: string; url: string }[];
+    };
+  };
   experience: { heading: string; items: Experience[] };
+  products: { heading: string; items: Project[] };
+  projects: { heading: string; items: Project[] };
+  writing: {
+    heading: string;
+    text: string;
+    cta: string;
+    url: string;
+    topics: string[];
+  };
   education: { heading: string; items: Education[] };
-  projects: { heading: string; viewProject: string; items: Project[] };
   skills: { heading: string; groups: { label: string; items: string[] }[] };
   contact: {
     heading: string;
@@ -56,9 +82,9 @@ export interface Content {
 export const content: Record<Lang, Content> = {
   en: {
     nav: {
-      about: "About",
+      work: "Work",
       experience: "Experience",
-      projects: "Projects",
+      writing: "Writing",
       skills: "Skills",
       contact: "Contact",
     },
@@ -67,18 +93,61 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "Backend developer focused on Django, Go, distributed systems, async processing, caching strategies, and scalable API design. Building production SaaS products serving real users.",
+        "Building scalable APIs, distributed systems, and SaaS products with Python and Go.",
+      currentWork: "Currently building Apparelte and Screenshotbeam.",
+      focusAreas: [
+        "Production Systems",
+        "Distributed Systems",
+        "Django / Go",
+        "SaaS Builder",
+      ],
       availability: "Open to new opportunities",
       cta: "Get in touch",
-      ctaSecondary: "See my work",
+      ctaSecondary: "View Screenshotbeam",
       ctaResume: "Resume ↓",
     },
-    about: {
-      heading: "About",
-      paragraphs: [
-        "I'm a backend developer who owns system design end to end. I design backend architecture, async processing pipelines, caching strategies, and APIs built to perform under real production load.",
-        "I've been the sole backend developer on a live SaaS product, processing thousands of daily requests and background tasks. My focus is performance optimization, reliability, and shipping software that scales with the product.",
-      ],
+    stats: [
+      { value: "2", label: "Production products" },
+      { value: "40+", label: "APIs built" },
+      { value: "85%", label: "Upload latency cut" },
+      { value: "18ms", label: "DB response (optimized)" },
+    ],
+    featured: {
+      label: "Featured Project",
+      project: {
+        name: "Screenshotbeam",
+        tagline: "Production SaaS for website screenshots",
+        description:
+          "Distributed microservice architecture with a FastAPI orchestrator and a dedicated Go rendering engine. Built to handle concurrent screenshot jobs with browser pooling, rate limiting, and Stripe billing.",
+        highlights: [
+          "Go Renderer",
+          "Browser Pool",
+          "Redis",
+          "PostgreSQL",
+          "Stripe",
+          "Docker",
+          "SSRF Protection",
+        ],
+        metric: "Memory usage reduced by 75% (~200MB → ~50MB idle)",
+        architecture: `User
+  ↓
+FastAPI API (auth, billing, jobs)
+  ↓
+Redis Queue
+  ↓
+Go Renderer (Fiber + go-rod)
+  ↓
+Browser Pool (Chrome instances)
+  ↓
+S3 + CDN`,
+        stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
+        link: "https://www.screenshotbeam.com/",
+        github: "https://github.com/onurmacit/screenshot-api",
+        links: [
+          { label: "Live Demo", url: "https://www.screenshotbeam.com/" },
+          { label: "View Source", url: "https://github.com/onurmacit/screenshot-api" },
+        ],
+      },
     },
     experience: {
       heading: "Experience",
@@ -87,18 +156,78 @@ export const content: Record<Lang, Content> = {
           role: "Backend Developer",
           company: "Vyrin Lab",
           period: "2024 — Present",
-          summary:
-            "Sole backend developer for Apparelte, a production fashion social platform with real users. Early-stage product team. Designed and maintained backend architecture for 40+ API endpoints handling thousands of daily requests. Designed event-driven background task workflows with Celery workers processing thousands of media tasks daily. Built async media pipeline (AWS + Celery) reducing upload latency by 85% (3.2s → 480ms). Designed Redis caching strategy cutting redundant DB queries by 70%. Optimized high-traffic endpoints, reducing average DB response from 120ms to 18ms.",
+          context: "Early-stage product team · production SaaS",
+          highlights: [
+            "Sole backend developer for Apparelte, a production fashion social platform",
+            "Built 40+ API endpoints handling thousands of daily requests",
+            "Designed async media pipeline (AWS + Celery), reducing upload latency by 85%",
+            "Designed Redis feed caching, cutting redundant DB queries by 70%",
+            "Optimized high-traffic endpoints: 120ms → 18ms average DB response",
+          ],
           stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery"],
         },
         {
           role: "Freelance Software Developer",
           company: "Self-employed",
           period: "2023 — 2024",
-          summary:
-            "Delivered production web applications for SMB clients, from requirements to deployment on Vercel.",
+          highlights: [
+            "Delivered production web applications for SMB clients end to end",
+          ],
           stack: ["Next.js", "TypeScript", "Vercel"],
         },
+      ],
+    },
+    products: {
+      heading: "Production Products",
+      items: [
+        {
+          name: "Apparelte",
+          tagline: "Fashion social platform · production",
+          description:
+            "Sole backend owner for a live social platform. Designed backend architecture, feed caching, async media processing, and API layer serving real users.",
+          highlights: [
+            "40+ REST endpoints",
+            "Redis feed caching",
+            "Celery media pipeline",
+            "AWS storage",
+          ],
+          metric: "85% upload latency reduction · 70% fewer DB queries",
+          architecture: `Mobile / Web Client
+  ↓
+Django REST API (40+ endpoints)
+  ↓
+Redis (feed cache)
+  ↓
+Celery Workers
+  ↓
+AWS S3 + PostgreSQL`,
+          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery", "JWT"],
+          link: "https://apparelte.com/",
+        },
+      ],
+    },
+    projects: {
+      heading: "Other Projects",
+      items: [
+        {
+          name: "IMDb Clone",
+          description:
+            "Movie database API with JWT auth, Redis caching, Cloudinary integration and CI/CD with automated tests on every PR.",
+          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "Docker", "GitHub Actions"],
+          github: "https://github.com/onurmacit/imdb-clone-backend",
+        },
+      ],
+    },
+    writing: {
+      heading: "Writing",
+      text: "I write about backend architecture, performance optimization, and lessons from building production systems.",
+      cta: "Read on Medium",
+      url: "https://medium.com/@onurmaciit",
+      topics: [
+        "Redis Cache Strategies",
+        "Celery Retry Patterns",
+        "PostgreSQL Query Optimization",
+        "Building Screenshotbeam Architecture",
       ],
     },
     education: {
@@ -108,27 +237,6 @@ export const content: Record<Lang, Content> = {
           degree: "Computer Programming",
           school: "Karadeniz Technical University",
           period: "2020 — 2024",
-        },
-      ],
-    },
-    projects: {
-      heading: "Selected Projects",
-      viewProject: "View project",
-      items: [
-        {
-          name: "Screenshotbeam",
-          description:
-            "Production-grade screenshot SaaS with distributed microservice architecture: FastAPI orchestrator for auth, billing and job management + dedicated Go rendering service. Built concurrent rendering in Go (Fiber + go-rod), replacing Playwright and reducing idle memory from ~200MB to ~50MB. Browser-pool architecture eliminates renderer cold starts (~2s saved per request). Features 4-tier rate limiting, Stripe billing, SSRF protection, and S3 storage with CDN.",
-          stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
-          github: "https://github.com/onurmacit/screenshot-api",
-          link: "https://www.screenshotbeam.com/",
-        },
-        {
-          name: "IMDb Clone",
-          description:
-            "Movie database API with JWT auth, Redis caching, Cloudinary integration and CI/CD pipeline with automated tests on every PR.",
-          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "Docker", "GitHub Actions"],
-          github: "https://github.com/onurmacit/imdb-clone-backend",
         },
       ],
     },
@@ -144,14 +252,13 @@ export const content: Record<Lang, Content> = {
     },
     contact: {
       heading: "Contact",
-      text: "I'm looking for backend or full-stack roles where I can build systems that matter. If you're solving interesting infrastructure problems, let's talk.",
+      text: "Looking for backend roles where I can own systems end to end. If you're building production SaaS, let's talk.",
       email: "onurmaciit@gmail.com",
       links: [
         { label: "GitHub", url: "https://github.com/onurmacit" },
         { label: "LinkedIn", url: "https://www.linkedin.com/in/onur-macit-b42a19223/" },
         { label: "Medium", url: "https://medium.com/@onurmaciit" },
         { label: "X", url: "https://x.com/onurmaciit" },
-        { label: "Instagram", url: "https://www.instagram.com/onuurmacit/" },
       ],
     },
     footer: "Designed & built by Onur Macit",
@@ -159,9 +266,9 @@ export const content: Record<Lang, Content> = {
 
   tr: {
     nav: {
-      about: "Hakkımda",
+      work: "İşler",
       experience: "Deneyim",
-      projects: "Projeler",
+      writing: "Yazılar",
       skills: "Yetenekler",
       contact: "İletişim",
     },
@@ -170,18 +277,61 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "Django, Go, dağıtık sistemler, async processing, caching stratejileri ve ölçeklenebilir API tasarımına odaklanan backend developer. Gerçek kullanıcıları olan production SaaS ürünleri geliştiriyorum.",
+        "Python ve Go ile ölçeklenebilir API'lar, dağıtık sistemler ve SaaS ürünleri geliştiriyorum.",
+      currentWork: "Şu an Apparelte ve Screenshotbeam üzerinde çalışıyorum.",
+      focusAreas: [
+        "Production Systems",
+        "Distributed Systems",
+        "Django / Go",
+        "SaaS Builder",
+      ],
       availability: "Yeni fırsatlara açığım",
       cta: "İletişime geç",
-      ctaSecondary: "Çalışmalarımı gör",
+      ctaSecondary: "Screenshotbeam'i gör",
       ctaResume: "CV ↓",
     },
-    about: {
-      heading: "Hakkımda",
-      paragraphs: [
-        "Sistem tasarımını uçtan uca sahiplenen bir backend developer'ım. Backend mimarisi, async processing pipeline'ları, caching stratejileri ve gerçek production yükü altında performans gösteren API'lar tasarlıyorum.",
-        "Canlı bir SaaS ürününün tek backend developer'ı olarak günde binlerce istek ve arka plan görevi işleyen sistemler kurdum. Odak noktam performans optimizasyonu, güvenilirlik ve ürünle birlikte ölçeklenen yazılım.",
-      ],
+    stats: [
+      { value: "2", label: "Production ürün" },
+      { value: "40+", label: "API endpoint" },
+      { value: "%85", label: "Upload gecikmesi azaltıldı" },
+      { value: "18ms", label: "DB yanıt (optimize)" },
+    ],
+    featured: {
+      label: "Öne Çıkan Proje",
+      project: {
+        name: "Screenshotbeam",
+        tagline: "Website screenshot'ları için production SaaS",
+        description:
+          "FastAPI orchestrator ve Go rendering engine ile dağıtık microservice mimarisi. Browser pooling, rate limiting ve Stripe billing ile concurrent screenshot işleri.",
+        highlights: [
+          "Go Renderer",
+          "Browser Pool",
+          "Redis",
+          "PostgreSQL",
+          "Stripe",
+          "Docker",
+          "SSRF Protection",
+        ],
+        metric: "Bellek kullanımı %75 azaltıldı (~200MB → ~50MB idle)",
+        architecture: `User
+  ↓
+FastAPI API (auth, billing, jobs)
+  ↓
+Redis Queue
+  ↓
+Go Renderer (Fiber + go-rod)
+  ↓
+Browser Pool (Chrome instances)
+  ↓
+S3 + CDN`,
+        stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
+        link: "https://www.screenshotbeam.com/",
+        github: "https://github.com/onurmacit/screenshot-api",
+        links: [
+          { label: "Canlı Demo", url: "https://www.screenshotbeam.com/" },
+          { label: "Kaynak Kod", url: "https://github.com/onurmacit/screenshot-api" },
+        ],
+      },
     },
     experience: {
       heading: "Deneyim",
@@ -190,18 +340,78 @@ export const content: Record<Lang, Content> = {
           role: "Backend Developer",
           company: "Vyrin Lab",
           period: "2024 — Günümüz",
-          summary:
-            "Apparelte'nin tek backend developer'ıyım; gerçek kullanıcıları olan production moda sosyal platformu. Erken aşama ürün ekibi. Günde binlerce isteği karşılayan 40+ API endpoint için backend mimarisini tasarladım ve sürdürdüm. Celery worker'larla günde binlerce medya görevi işleyen event-driven workflow'lar kurdum. AWS + Celery ile async medya pipeline'ı kurarak yükleme gecikmesini %85 azalttım (3.2s → 480ms). Redis caching stratejisi ile gereksiz DB sorgularını %70 azalttım. Yoğun trafikli endpoint'lerde ortalama DB yanıt süresini 120ms'den 18ms'ye düşürdüm.",
+          context: "Erken aşama ürün ekibi · production SaaS",
+          highlights: [
+            "Apparelte'nin tek backend developer'ı — production moda sosyal platform",
+            "Günde binlerce isteği karşılayan 40+ API endpoint geliştirdim",
+            "AWS + Celery ile async medya pipeline'ı, upload gecikmesini %85 azalttı",
+            "Redis feed caching ile gereksiz DB sorgularını %70 azalttı",
+            "Yoğun trafikli endpoint'lerde DB yanıtını 120ms'den 18ms'ye düşürdüm",
+          ],
           stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery"],
         },
         {
           role: "Freelance Yazılım Geliştirici",
           company: "Serbest",
           period: "2023 — 2024",
-          summary:
-            "KOBİ müşterilere gereksinimlerden Vercel deploy'una kadar production web uygulamaları teslim ettim.",
+          highlights: [
+            "KOBİ müşterilere uçtan uca production web uygulamaları teslim ettim",
+          ],
           stack: ["Next.js", "TypeScript", "Vercel"],
         },
+      ],
+    },
+    products: {
+      heading: "Production Ürünler",
+      items: [
+        {
+          name: "Apparelte",
+          tagline: "Moda sosyal platform · production",
+          description:
+            "Canlı sosyal platformun tek backend sahibi. Backend mimarisi, feed caching, async medya işleme ve gerçek kullanıcılara hizmet veren API katmanı.",
+          highlights: [
+            "40+ REST endpoint",
+            "Redis feed cache",
+            "Celery medya pipeline",
+            "AWS depolama",
+          ],
+          metric: "%85 upload gecikmesi azaltma · %70 daha az DB sorgusu",
+          architecture: `Mobile / Web Client
+  ↓
+Django REST API (40+ endpoint)
+  ↓
+Redis (feed cache)
+  ↓
+Celery Workers
+  ↓
+AWS S3 + PostgreSQL`,
+          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery", "JWT"],
+          link: "https://apparelte.com/",
+        },
+      ],
+    },
+    projects: {
+      heading: "Diğer Projeler",
+      items: [
+        {
+          name: "IMDb Clone",
+          description:
+            "JWT auth, Redis caching, Cloudinary entegrasyonu ve her PR'da otomatik test çalıştıran CI/CD pipeline'lı film veritabanı API'si.",
+          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "Docker", "GitHub Actions"],
+          github: "https://github.com/onurmacit/imdb-clone-backend",
+        },
+      ],
+    },
+    writing: {
+      heading: "Yazılar",
+      text: "Backend mimarisi, performans optimizasyonu ve production sistemlerden çıkardığım dersler hakkında yazıyorum.",
+      cta: "Medium'da oku",
+      url: "https://medium.com/@onurmaciit",
+      topics: [
+        "Redis Cache Stratejileri",
+        "Celery Retry Pattern'leri",
+        "PostgreSQL Sorgu Optimizasyonu",
+        "Screenshotbeam Mimarisi",
       ],
     },
     education: {
@@ -211,27 +421,6 @@ export const content: Record<Lang, Content> = {
           degree: "Bilgisayar Programcılığı",
           school: "Karadeniz Teknik Üniversitesi",
           period: "2020 — 2024",
-        },
-      ],
-    },
-    projects: {
-      heading: "Seçili Projeler",
-      viewProject: "Projeyi gör",
-      items: [
-        {
-          name: "Screenshotbeam",
-          description:
-            "Dağıtık microservice mimarili production screenshot SaaS: auth, billing ve job management için FastAPI orchestrator + Go rendering servisi. Go (Fiber + go-rod) ile concurrent rendering, Playwright yerine geçirildi, idle bellek ~200MB'dan ~50MB'a düştü. Browser-pool mimarisi cold start'ı elimine ediyor (istek başına ~2s tasarruf). 4 kademeli rate limiting, Stripe billing, SSRF koruması ve CDN'li S3 depolama.",
-          stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
-          github: "https://github.com/onurmacit/screenshot-api",
-          link: "https://www.screenshotbeam.com/",
-        },
-        {
-          name: "IMDb Clone",
-          description:
-            "JWT auth, Redis caching, Cloudinary entegrasyonu ve her PR'da otomatik test çalıştıran CI/CD pipeline'lı film veritabanı API'si.",
-          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "Docker", "GitHub Actions"],
-          github: "https://github.com/onurmacit/imdb-clone-backend",
         },
       ],
     },
@@ -247,14 +436,13 @@ export const content: Record<Lang, Content> = {
     },
     contact: {
       heading: "İletişim",
-      text: "Önemli sistemler inşa edebileceğim backend veya full-stack roller arıyorum. İlginç altyapı problemleri çözüyorsanız konuşalım.",
+      text: "Sistemleri uçtan uca sahiplenebileceğim backend roller arıyorum. Production SaaS inşa ediyorsanız konuşalım.",
       email: "onurmaciit@gmail.com",
       links: [
         { label: "GitHub", url: "https://github.com/onurmacit" },
         { label: "LinkedIn", url: "https://www.linkedin.com/in/onur-macit-b42a19223/" },
         { label: "Medium", url: "https://medium.com/@onurmaciit" },
         { label: "X", url: "https://x.com/onurmaciit" },
-        { label: "Instagram", url: "https://www.instagram.com/onuurmacit/" },
       ],
     },
     footer: "Onur Macit tarafından tasarlandı ve geliştirildi",
