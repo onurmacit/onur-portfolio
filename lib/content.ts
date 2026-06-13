@@ -1,5 +1,5 @@
 // ============================================================
-//  EDIT THIS FILE — bütün site içeriği burada.
+//  EDIT THIS FILE - bütün site içeriği burada.
 // ============================================================
 
 export type Lang = "en" | "tr";
@@ -87,7 +87,7 @@ export const content: Record<Lang, Content> = {
         {
           role: "Backend Developer",
           company: "Vyrin Lab",
-          period: "2024 — Present",
+          period: "2024 - Present",
           summary:
             "Sole backend developer on an early-stage product team. Own APIs, caching, and async pipelines for a live production product.",
           project: {
@@ -95,15 +95,15 @@ export const content: Record<Lang, Content> = {
             tagline: "Fashion social platform",
             story: {
               context:
-                "Live social product — scroll-heavy feed, image uploads from mobile, engagement signals driving ranking.",
+                "Live social product: scroll-heavy feed, image uploads from mobile, engagement signals driving ranking.",
               constraint:
-                "Image processing inside the request cycle blocked responses for ~3.2s. Feed queries hit PostgreSQL on every page load. Staying a Django monolith — solo dev, deploy speed over service boundaries.",
+                "Image processing inside the request cycle blocked responses for ~3.2s. Feed queries hit PostgreSQL on every page load. Staying a Django monolith; solo dev, deploy speed over service boundaries.",
               decision:
-                "Moved media to a Celery + AWS async pipeline; API returns immediately with a job reference. Layered Redis for personalized feeds with narrow, engagement-based invalidation — not cache-the-whole-feed. Rejected GraphQL and microservices for this stage.",
+                "Moved media to a Celery + AWS async pipeline; API returns immediately with a job reference. Layered Redis for personalized feeds with narrow, engagement-based invalidation, not cache-the-whole-feed. Rejected GraphQL and microservices for this stage.",
               outcome:
                 "Upload path: 3.2s → 480ms. ~70% fewer redundant feed queries. Hot endpoints down to ~18ms average DB response.",
               lesson:
-                "Race condition in production: a post could surface in the feed before Celery committed the media URL — publish and worker completion were racing. Fixed with a post status gate (`media_ready` must be committed before feed invalidation), `select_for_update` on publish, and Celery idempotency keys per post so client retries don't enqueue duplicate jobs.",
+                "Race condition in production: a post could surface in the feed before Celery committed the media URL. Publish and worker completion were racing. Fixed with a post status gate (`media_ready` must be committed before feed invalidation), `select_for_update` on publish, and Celery idempotency keys per post so client retries don't enqueue duplicate jobs.",
             },
             stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
             link: "https://apparelte.com/",
@@ -112,7 +112,7 @@ export const content: Record<Lang, Content> = {
         {
           role: "Freelance Developer",
           company: "Self-employed",
-          period: "2023 — 2024",
+          period: "2023 - 2024",
           summary:
             "Delivered production web applications for SMB clients end to end, from requirements to deployment on Vercel.",
         },
@@ -126,15 +126,15 @@ export const content: Record<Lang, Content> = {
           tagline: "Screenshot SaaS",
           story: {
             context:
-              "Side-project SaaS — users submit URLs, system returns rendered screenshots. Needed concurrency, abuse protection, and billing from day one.",
+              "Side-project SaaS: users submit URLs, system returns rendered screenshots. Needed concurrency, abuse protection, and billing from day one.",
             constraint:
               "Playwright in Python worked for a POC but cost ~200MB idle per instance and ~2s cold start on every new browser session. API could not wait on Chrome inside the request thread.",
             decision:
-              "Split into FastAPI orchestrator (auth, billing, SSRF checks, 4-tier rate limiting) and a dedicated Go renderer (Fiber + go-rod) with a pre-warmed browser pool behind Redis. Rejected a Node Puppeteer pool — wanted to drop the Node dependency and control memory directly.",
+              "Split into FastAPI orchestrator (auth, billing, SSRF checks, 4-tier rate limiting) and a dedicated Go renderer (Fiber + go-rod) with a pre-warmed browser pool behind Redis. Rejected a Node Puppeteer pool; wanted to drop the Node dependency and control memory directly.",
             outcome:
               "Idle memory ~200MB → ~50MB per renderer. ~2s saved per render via warm browsers. SSRF protection, Stripe billing, S3 + CDN delivery integrated.",
             lesson:
-              "Render service is paused today due to infra cost — but the split paid off: landing, auth, and billing stayed up without touching the renderer. Restart is a scaling problem, not a rewrite.",
+              "Render service is paused today due to infra cost, but the split paid off: landing, auth, and billing stayed up without touching the renderer. Restart is a scaling problem, not a rewrite.",
           },
           stack: ["Go", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
           link: "https://www.screenshotbeam.com/",
@@ -186,7 +186,7 @@ export const content: Record<Lang, Content> = {
         {
           role: "Backend Developer",
           company: "Vyrin Lab",
-          period: "2024 — Günümüz",
+          period: "2024 - Günümüz",
           summary:
             "Erken aşama ürün ekibinde tek backend developer. Canlı ürün için API, cache ve async pipeline'ları yönetiyorum.",
           project: {
@@ -194,15 +194,15 @@ export const content: Record<Lang, Content> = {
             tagline: "Moda sosyal platform",
             story: {
               context:
-                "Canlı sosyal ürün — feed scroll ağırlıklı, mobilde görsel upload, engagement sinyalleriyle sıralama.",
+                "Canlı sosyal ürün: feed scroll ağırlıklı, mobilde görsel upload, engagement sinyalleriyle sıralama.",
               constraint:
-                "Görsel işleme request içindeydi ve yanıtı ~3.2s bloke ediyordu. Feed sorguları her sayfa yüklemesinde PostgreSQL'e gidiyordu. Tek developer olduğum için Django monolith'te kaldım — deploy hızı, service boundary çizmekten önce geldi.",
+                "Görsel işleme request içindeydi ve yanıtı ~3.2s bloke ediyordu. Feed sorguları her sayfa yüklemesinde PostgreSQL'e gidiyordu. Tek developer olduğum için Django monolith'te kaldım; deploy hızı, service boundary çizmekten önce geldi.",
               decision:
-                "Medyayı Celery + AWS async pipeline'a taşıdım; API hemen job referansı döndürüyor. Kişiselleştirilmiş feed için Redis katmanı — tüm feed'i değil, dar engagement tabanlı invalidation. Bu aşamada GraphQL ve microservice'i bilinçli olarak seçmedim.",
+                "Medyayı Celery + AWS async pipeline'a taşıdım; API hemen job referansı döndürüyor. Kişiselleştirilmiş feed için Redis katmanı, tüm feed'i değil, dar engagement tabanlı invalidation. Bu aşamada GraphQL ve microservice'i bilinçli olarak seçmedim.",
               outcome:
                 "Upload yolu: 3.2s → 480ms. ~%70 daha az gereksiz feed sorgusu. Hot endpoint'lerde ~18ms ortalama DB yanıtı.",
               lesson:
-                "Production'da race condition: post, Celery media URL'ini commit etmeden feed'de görünebiliyordu — publish ile worker completion yarışıyordu. `media_ready` commit edilmeden feed invalidation yok, publish'te `select_for_update`, post başına Celery idempotency key ile client retry'ların duplicate job üretmesini kestim.",
+                "Production'da race condition: post, Celery media URL'ini commit etmeden feed'de görünebiliyordu. Publish ile worker completion yarışıyordu. `media_ready` commit edilmeden feed invalidation yok, publish'te `select_for_update`, post başına Celery idempotency key ile client retry'ların duplicate job üretmesini kestim.",
             },
             stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
             link: "https://apparelte.com/",
@@ -211,7 +211,7 @@ export const content: Record<Lang, Content> = {
         {
           role: "Freelance Developer",
           company: "Serbest",
-          period: "2023 — 2024",
+          period: "2023 - 2024",
           summary:
             "KOBİ müşterilere uçtan uca production web uygulamaları teslim ettim; gereksinimden Vercel deploy'a kadar.",
         },
@@ -225,15 +225,15 @@ export const content: Record<Lang, Content> = {
           tagline: "Screenshot SaaS",
           story: {
             context:
-              "Yan proje SaaS — kullanıcı URL gönderiyor, sistem screenshot döndürüyor. Concurrency, abuse koruması ve billing baştan gerekliydi.",
+              "Yan proje SaaS: kullanıcı URL gönderiyor, sistem screenshot döndürüyor. Concurrency, abuse koruması ve billing baştan gerekliydi.",
             constraint:
               "Python Playwright POC için yeterliydi ama instance başına ~200MB idle ve her yeni browser session'da ~2s cold start vardı. API, request thread'i içinde Chrome bekleyemezdi.",
             decision:
-              "FastAPI orchestrator (auth, billing, SSRF, 4 kademeli rate limiting) + Go renderer (Fiber + go-rod) ve Redis arkasında pre-warmed browser pool. Node Puppeteer pool'u reddettim — Node bağımlılığını ve belleği doğrudan kontrol etmek istedim.",
+              "FastAPI orchestrator (auth, billing, SSRF, 4 kademeli rate limiting) + Go renderer (Fiber + go-rod) ve Redis arkasında pre-warmed browser pool. Node Puppeteer pool'u reddettim; Node bağımlılığını ve belleği doğrudan kontrol etmek istedim.",
             outcome:
               "Idle bellek ~200MB → ~50MB per renderer. Warm browser ile render başına ~2s kazanç. SSRF koruması, Stripe billing, S3 + CDN entegrasyonu.",
             lesson:
-              "Render servisi bugün infra maliyeti nedeniyle pause — ama ayrım işe yaradı: landing, auth ve billing renderer'a dokunmadan ayakta. Restart bir scaling meselesi, rewrite değil.",
+              "Render servisi bugün infra maliyeti nedeniyle pause, ama ayrım işe yaradı: landing, auth ve billing renderer'a dokunmadan ayakta. Restart bir scaling meselesi, rewrite değil.",
           },
           stack: ["Go", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
           link: "https://www.screenshotbeam.com/",

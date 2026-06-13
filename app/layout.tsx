@@ -16,12 +16,12 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Onur Macit — Backend Developer",
+  title: "Onur Macit | Backend Developer",
   description:
     "Backend developer building scalable APIs, distributed systems, and SaaS products with Python and Go. Screenshotbeam & Apparelte.",
   metadataBase: new URL("https://onurmacit.dev"),
   openGraph: {
-    title: "Onur Macit — Backend Developer",
+    title: "Onur Macit | Backend Developer",
     description:
       "Backend developer focused on Django, Go and distributed systems. Production SaaS with real users.",
     url: "https://onurmacit.dev",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Onur Macit — Backend Developer",
+    title: "Onur Macit | Backend Developer",
     description:
       "Backend developer focused on Django, Go and production SaaS.",
     creator: "@onurmaciit",

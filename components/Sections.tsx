@@ -160,7 +160,7 @@ export function Footer() {
     <footer className="border-t border-line">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-6">
         <p className="text-xs text-subtle">
-          © {new Date().getFullYear()} — {t.footer}
+          © {new Date().getFullYear()} · {t.footer}
         </p>
         <a href="#top" className="text-xs text-subtle transition-colors hover:text-accent">
           ↑
