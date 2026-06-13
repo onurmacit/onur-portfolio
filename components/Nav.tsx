@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLanguage } from "./LanguageProvider";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Nav() {
   const { lang, setLang, t } = useLanguage();
@@ -45,10 +46,12 @@ export function Nav() {
               {link.label}
             </a>
           ))}
+          <ThemeToggle />
           <LangToggle lang={lang} setLang={setLang} />
         </div>
 
-        <div className="flex items-center gap-4 sm:hidden">
+        <div className="flex items-center gap-3 sm:hidden">
+          <ThemeToggle />
           <LangToggle lang={lang} setLang={setLang} />
           <button
             onClick={() => setMenuOpen(!menuOpen)}

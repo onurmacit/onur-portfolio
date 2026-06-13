@@ -1,26 +1,70 @@
 "use client";
 
-import { useEffect } from "react";
-import { applyTheme, getCurrentTheme, msUntilNextThemeChange } from "@/lib/theme";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import {
+  applyTheme,
+  msUntilNextAutoThemeChange,
+  readStoredPreference,
+  resolveTheme,
+  storePreference,
+  type Theme,
+  type ThemePreference,
+} from "@/lib/theme";
+
+interface ThemeContextValue {
+  preference: ThemePreference;
+  theme: Theme;
+  setPreference: (preference: ThemePreference) => void;
+}
+
+const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    const sync = () => applyTheme(getCurrentTheme());
+  const [preference, setPreferenceState] = useState<ThemePreference>("auto");
+  const [theme, setTheme] = useState<Theme>("day");
 
-    sync();
+  const syncTheme = useCallback((nextPreference: ThemePreference) => {
+    const resolved = resolveTheme(nextPreference);
+    applyTheme(resolved);
+    setTheme(resolved);
+  }, []);
+
+  const setPreference = useCallback(
+    (nextPreference: ThemePreference) => {
+      storePreference(nextPreference);
+      setPreferenceState(nextPreference);
+      syncTheme(nextPreference);
+    },
+    [syncTheme],
+  );
+
+  useEffect(() => {
+    const stored = readStoredPreference();
+    setPreferenceState(stored);
+    syncTheme(stored);
+  }, [syncTheme]);
+
+  useEffect(() => {
+    if (preference !== "auto") return;
 
     let timeoutId: ReturnType<typeof setTimeout>;
     const schedule = () => {
       timeoutId = setTimeout(() => {
-        sync();
+        syncTheme("auto");
         schedule();
-      }, msUntilNextThemeChange());
+      }, msUntilNextAutoThemeChange());
     };
 
     schedule();
 
     const onVisibility = () => {
-      if (document.visibilityState === "visible") sync();
+      if (document.visibilityState === "visible") syncTheme("auto");
     };
     document.addEventListener("visibilitychange", onVisibility);
 
@@ -28,7 +72,17 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       clearTimeout(timeoutId);
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, []);
+  }, [preference, syncTheme]);
 
-  return children;
+  return (
+    <ThemeContext.Provider value={{ preference, theme, setPreference }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+export function useTheme() {
+  const ctx = useContext(ThemeContext);
+  if (!ctx) throw new Error("useTheme must be used within ThemeProvider");
+  return ctx;
 }
