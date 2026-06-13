@@ -89,7 +89,7 @@ export const content: Record<Lang, Content> = {
           company: "Vyrin Lab",
           period: "2024 — Present",
           summary:
-            "Sole backend developer on an early-stage product team. Own APIs, caching, and async pipelines for a live SaaS product.",
+            "Sole backend developer on an early-stage product team. Own APIs, caching, and async pipelines for a live production product.",
           project: {
             name: "Apparelte",
             tagline: "Fashion social platform",
@@ -188,7 +188,7 @@ export const content: Record<Lang, Content> = {
           company: "Vyrin Lab",
           period: "2024 — Günümüz",
           summary:
-            "Erken aşama ürün ekibinde tek backend developer. Canlı SaaS ürünü için API, cache ve async pipeline'ları yönetiyorum.",
+            "Erken aşama ürün ekibinde tek backend developer. Canlı ürün için API, cache ve async pipeline'ları yönetiyorum.",
           project: {
             name: "Apparelte",
             tagline: "Moda sosyal platform",
