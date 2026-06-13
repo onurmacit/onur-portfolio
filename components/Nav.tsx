@@ -17,9 +17,8 @@ export function Nav() {
 
   const links = [
     { href: "#featured", label: t.nav.work },
-    { href: "#experience", label: t.nav.experience },
+    { href: "#products", label: t.nav.products },
     { href: "#writing", label: t.nav.writing },
-    { href: "#skills", label: t.nav.skills },
     { href: "#contact", label: t.nav.contact },
   ];
 

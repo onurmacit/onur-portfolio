@@ -3,12 +3,9 @@ import {
   Hero,
   Stats,
   Featured,
-  Experience,
   Products,
-  Projects,
+  Timeline,
   Writing,
-  Skills,
-  Education,
   Contact,
   Footer,
 } from "@/components/Sections";
@@ -21,12 +18,9 @@ export default function Home() {
         <Hero />
         <Stats />
         <Featured />
-        <Experience />
         <Products />
-        <Projects />
+        <Timeline />
         <Writing />
-        <Skills />
-        <Education />
         <Contact />
       </main>
       <Footer />

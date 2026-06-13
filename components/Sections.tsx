@@ -158,47 +158,30 @@ export function Featured() {
   );
 }
 
-export function Experience() {
+export function Timeline() {
   const { t } = useLanguage();
   return (
-    <section id="experience" className="mx-auto max-w-3xl px-6 py-24">
+    <section id="background" className="mx-auto max-w-3xl px-6 py-12">
       <Reveal>
-        <SectionHeading number="01" title={t.experience.heading} />
+        <p className="mb-4 text-xs font-medium uppercase tracking-widest text-subtle">
+          {t.timeline.heading}
+        </p>
       </Reveal>
-      <ol className="relative space-y-12 border-l border-line pl-8">
-        {t.experience.items.map((job, i) => (
-          <li key={i} className="relative">
-            <span
-              className="absolute -left-[37px] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-accent"
-              aria-hidden
-            />
-            <Reveal delay={i * 100}>
-              <p className="text-xs font-medium uppercase tracking-widest text-subtle">
-                {job.period}
+      <div className="space-y-3">
+        {t.timeline.items.map((entry, i) => (
+          <Reveal key={entry.company} delay={i * 60}>
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-line py-3 last:border-b-0">
+              <p className="font-serif text-base font-medium">
+                {entry.role}
+                <span className="text-muted"> · {entry.company}</span>
               </p>
-              <h3 className="mt-2 font-serif text-xl font-medium">
-                {job.role} <span className="text-muted">· {job.company}</span>
-              </h3>
-              {job.context && (
-                <p className="mt-1 text-sm italic text-subtle">{job.context}</p>
-              )}
-              <ul className="mt-4 max-w-2xl space-y-2">
-                {job.highlights.map((h) => (
-                  <li key={h} className="flex gap-2 text-sm leading-relaxed text-muted">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                    {h}
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {job.stack.map((tech) => (
-                  <Tag key={tech}>{tech}</Tag>
-                ))}
-              </div>
-            </Reveal>
-          </li>
+              <p className="text-xs font-medium uppercase tracking-widest text-subtle">
+                {entry.period}
+              </p>
+            </div>
+          </Reveal>
         ))}
-      </ol>
+      </div>
     </section>
   );
 }
@@ -208,7 +191,7 @@ export function Products() {
   return (
     <section id="products" className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
-        <SectionHeading number="02" title={t.products.heading} />
+        <SectionHeading number="01" title={t.products.heading} />
       </Reveal>
       <div className="space-y-8">
         {t.products.items.map((product, i) => (
@@ -265,51 +248,12 @@ export function Products() {
   );
 }
 
-export function Projects() {
-  const { t } = useLanguage();
-  return (
-    <section id="projects" className="mx-auto max-w-3xl px-6 py-24">
-      <Reveal>
-        <SectionHeading number="03" title={t.projects.heading} />
-      </Reveal>
-      <div className="grid gap-5">
-        {t.projects.items.map((project, i) => {
-          const href = project.link ?? project.github;
-          return (
-            <Reveal key={project.name} delay={i * 100}>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col rounded-2xl border border-line bg-white/60 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_12px_40px_-12px_rgba(154,52,18,0.15)]"
-              >
-                <div className="flex items-start justify-between">
-                  <h3 className="font-serif text-xl font-medium group-hover:text-accent">
-                    {project.name}
-                  </h3>
-                  <ArrowIcon />
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-muted">{project.description}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <Tag key={tech}>{tech}</Tag>
-                  ))}
-                </div>
-              </a>
-            </Reveal>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
 export function Writing() {
   const { t } = useLanguage();
   return (
     <section id="writing" className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
-        <SectionHeading number="04" title={t.writing.heading} />
+        <SectionHeading number="02" title={t.writing.heading} />
       </Reveal>
       <Reveal delay={100}>
         <p className="max-w-2xl leading-relaxed text-muted">{t.writing.text}</p>
@@ -334,61 +278,12 @@ export function Writing() {
   );
 }
 
-export function Skills() {
-  const { t } = useLanguage();
-  return (
-    <section id="skills" className="mx-auto max-w-3xl px-6 py-24">
-      <Reveal>
-        <SectionHeading number="05" title={t.skills.heading} />
-      </Reveal>
-      <div className="grid gap-x-12 gap-y-10 sm:grid-cols-2">
-        {t.skills.groups.map((group, i) => (
-          <Reveal key={group.label} delay={i * 80}>
-            <h3 className="mb-4 text-xs font-medium uppercase tracking-widest text-subtle">
-              {group.label}
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {group.items.map((skill) => (
-                <Tag key={skill}>{skill}</Tag>
-              ))}
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export function Education() {
-  const { t } = useLanguage();
-  return (
-    <section id="education" className="mx-auto max-w-3xl px-6 py-24">
-      <Reveal>
-        <SectionHeading number="06" title={t.education.heading} />
-      </Reveal>
-      {t.education.items.map((item, i) => (
-        <Reveal key={i} delay={i * 100}>
-          <div className="flex items-baseline justify-between gap-4">
-            <div>
-              <h3 className="font-serif text-xl font-medium">{item.degree}</h3>
-              <p className="mt-1 text-muted">{item.school}</p>
-            </div>
-            <p className="shrink-0 text-xs font-medium uppercase tracking-widest text-subtle">
-              {item.period}
-            </p>
-          </div>
-        </Reveal>
-      ))}
-    </section>
-  );
-}
-
 export function Contact() {
   const { t } = useLanguage();
   return (
     <section id="contact" className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
-        <SectionHeading number="07" title={t.contact.heading} />
+        <SectionHeading number="03" title={t.contact.heading} />
       </Reveal>
       <Reveal delay={100}>
         <p className="max-w-xl leading-relaxed text-muted">{t.contact.text}</p>
@@ -494,22 +389,5 @@ function Tag({ children, accent }: { children: React.ReactNode; accent?: boolean
     >
       {children}
     </span>
-  );
-}
-
-function ArrowIcon() {
-  return (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      className="mt-1 shrink-0 text-subtle transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
-      aria-hidden
-    >
-      <path d="M7 17L17 7M17 7H8M17 7v9" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }

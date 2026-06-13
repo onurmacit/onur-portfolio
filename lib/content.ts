@@ -4,13 +4,10 @@
 
 export type Lang = "en" | "tr";
 
-export interface Experience {
+export interface TimelineEntry {
   role: string;
   company: string;
   period: string;
-  context?: string;
-  highlights: string[];
-  stack: string[];
 }
 
 export interface Project {
@@ -27,18 +24,11 @@ export interface Project {
   github?: string;
 }
 
-export interface Education {
-  degree: string;
-  school: string;
-  period: string;
-}
-
 export interface Content {
   nav: {
     work: string;
-    experience: string;
+    products: string;
     writing: string;
-    skills: string;
     contact: string;
   };
   hero: {
@@ -60,9 +50,8 @@ export interface Content {
       links: { label: string; url: string }[];
     };
   };
-  experience: { heading: string; items: Experience[] };
+  timeline: { heading: string; items: TimelineEntry[] };
   products: { heading: string; items: Project[] };
-  projects: { heading: string; items: Project[] };
   writing: {
     heading: string;
     text: string;
@@ -71,8 +60,6 @@ export interface Content {
     url: string;
     topics: string[];
   };
-  education: { heading: string; items: Education[] };
-  skills: { heading: string; groups: { label: string; items: string[] }[] };
   contact: {
     heading: string;
     text: string;
@@ -86,9 +73,8 @@ export const content: Record<Lang, Content> = {
   en: {
     nav: {
       work: "Work",
-      experience: "Experience",
+      products: "Products",
       writing: "Writing",
-      skills: "Skills",
       contact: "Contact",
     },
     hero: {
@@ -96,13 +82,14 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "Building scalable APIs, distributed systems, and SaaS products with Python and Go.",
-      currentWork: "Currently building Apparelte and Screenshotbeam.",
+        "I build backends that survive real traffic — not demos. Sole backend behind Apparelte (live social platform) and Screenshotbeam (screenshot SaaS I took from Playwright prototype to Go microservice).",
+      currentWork:
+        "Metrics, skills, and full work history live in my CV. This site is where I show how I think and what I shipped.",
       focusAreas: [
-        "Production Systems",
-        "Distributed Systems",
-        "Django / Go",
-        "SaaS Builder",
+        "Memory-bound → Go",
+        "Feed perf under load",
+        "Solo backend ownership",
+        "Async pipelines",
       ],
       availability: "Open to new opportunities",
       cta: "Get in touch",
@@ -110,10 +97,10 @@ export const content: Record<Lang, Content> = {
       ctaResume: "Resume ↓",
     },
     stats: [
-      { value: "2", label: "Production products" },
-      { value: "40+", label: "APIs built" },
-      { value: "85%", label: "Upload latency cut" },
-      { value: "18ms", label: "DB response (optimized)" },
+      { value: "200→50MB", label: "Playwright → Go idle memory" },
+      { value: "3.2s→480ms", label: "Async upload pipeline" },
+      { value: "~2s", label: "Cold-start eliminated per render" },
+      { value: "4-tier", label: "API rate limiting" },
     ],
     featured: {
       label: "Featured Project",
@@ -160,31 +147,18 @@ S3 + CDN`,
         ],
       },
     },
-    experience: {
-      heading: "Experience",
+    timeline: {
+      heading: "Background",
       items: [
         {
           role: "Backend Developer",
           company: "Vyrin Lab",
           period: "2024 — Present",
-          context: "Early-stage product team · production SaaS",
-          highlights: [
-            "Sole backend developer for Apparelte, a production fashion social platform",
-            "Built 40+ API endpoints handling thousands of daily requests",
-            "Designed async media pipeline (AWS + Celery), reducing upload latency by 85%",
-            "Designed Redis feed caching, cutting redundant DB queries by 70%",
-            "Optimized high-traffic endpoints: 120ms → 18ms average DB response",
-          ],
-          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery"],
         },
         {
-          role: "Freelance Software Developer",
+          role: "Freelance Developer",
           company: "Self-employed",
           period: "2023 — 2024",
-          highlights: [
-            "Delivered production web applications for SMB clients end to end",
-          ],
-          stack: ["Next.js", "TypeScript", "Vercel"],
         },
       ],
     },
@@ -226,18 +200,6 @@ AWS S3 + PostgreSQL`,
         },
       ],
     },
-    projects: {
-      heading: "Other Projects",
-      items: [
-        {
-          name: "IMDb Clone",
-          description:
-            "Movie database API with JWT auth, Redis caching, Cloudinary integration and CI/CD with automated tests on every PR.",
-          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "Docker", "GitHub Actions"],
-          github: "https://github.com/onurmacit/imdb-clone-backend",
-        },
-      ],
-    },
     writing: {
       heading: "Writing",
       text:
@@ -250,26 +212,6 @@ AWS S3 + PostgreSQL`,
         "Celery Retry Patterns",
         "PostgreSQL Query Optimization",
         "Building Screenshotbeam Architecture",
-      ],
-    },
-    education: {
-      heading: "Education",
-      items: [
-        {
-          degree: "Computer Programming",
-          school: "Karadeniz Technical University",
-          period: "2020 — 2024",
-        },
-      ],
-    },
-    skills: {
-      heading: "Skills",
-      groups: [
-        { label: "Languages", items: ["Python", "Go", "TypeScript", "JavaScript", "C#", "SQL"] },
-        { label: "Backend & APIs", items: ["Django", "DRF", "FastAPI", "Flask", "REST API Design", "JWT"] },
-        { label: "Data & Caching", items: ["PostgreSQL", "Redis", "Celery", "Query Optimization", "Alembic"] },
-        { label: "Cloud & Infrastructure", items: ["AWS", "Docker", "CI/CD", "GitHub Actions"] },
-        { label: "Quality", items: ["Pytest", "Structured Logging"] },
       ],
     },
     contact: {
@@ -289,9 +231,8 @@ AWS S3 + PostgreSQL`,
   tr: {
     nav: {
       work: "İşler",
-      experience: "Deneyim",
+      products: "Ürünler",
       writing: "Yazılar",
-      skills: "Yetenekler",
       contact: "İletişim",
     },
     hero: {
@@ -299,13 +240,14 @@ AWS S3 + PostgreSQL`,
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "Python ve Go ile ölçeklenebilir API'lar, dağıtık sistemler ve SaaS ürünleri geliştiriyorum.",
-      currentWork: "Şu an Apparelte ve Screenshotbeam üzerinde çalışıyorum.",
+        "Demo değil, gerçek trafiğe dayanan backend'ler inşa ediyorum. Apparelte'nin (canlı sosyal platform) ve Screenshotbeam'in (Playwright prototipinden Go microservice'e) tek backend sahibiyim.",
+      currentWork:
+        "Metrikler, yetenekler ve tam iş geçmişi CV'mde. Bu site nasıl düşündüğümü ve ne ship ettiğimi anlatıyor.",
       focusAreas: [
-        "Production Systems",
-        "Distributed Systems",
-        "Django / Go",
-        "SaaS Builder",
+        "Bellek limiti → Go",
+        "Feed performansı",
+        "Tek backend sahipliği",
+        "Async pipeline'lar",
       ],
       availability: "Yeni fırsatlara açığım",
       cta: "İletişime geç",
@@ -313,10 +255,10 @@ AWS S3 + PostgreSQL`,
       ctaResume: "CV ↓",
     },
     stats: [
-      { value: "2", label: "Production ürün" },
-      { value: "40+", label: "API endpoint" },
-      { value: "%85", label: "Upload gecikmesi azaltıldı" },
-      { value: "18ms", label: "DB yanıt (optimize)" },
+      { value: "200→50MB", label: "Playwright → Go idle bellek" },
+      { value: "3.2s→480ms", label: "Async upload pipeline" },
+      { value: "~2s", label: "Render cold-start kaldırıldı" },
+      { value: "4 kademe", label: "API rate limiting" },
     ],
     featured: {
       label: "Öne Çıkan Proje",
@@ -363,31 +305,18 @@ S3 + CDN`,
         ],
       },
     },
-    experience: {
-      heading: "Deneyim",
+    timeline: {
+      heading: "Arka Plan",
       items: [
         {
           role: "Backend Developer",
           company: "Vyrin Lab",
           period: "2024 — Günümüz",
-          context: "Erken aşama ürün ekibi · production SaaS",
-          highlights: [
-            "Apparelte'nin tek backend developer'ı — production moda sosyal platform",
-            "Günde binlerce isteği karşılayan 40+ API endpoint geliştirdim",
-            "AWS + Celery ile async medya pipeline'ı, upload gecikmesini %85 azalttı",
-            "Redis feed caching ile gereksiz DB sorgularını %70 azalttı",
-            "Yoğun trafikli endpoint'lerde DB yanıtını 120ms'den 18ms'ye düşürdüm",
-          ],
-          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery"],
         },
         {
-          role: "Freelance Yazılım Geliştirici",
+          role: "Freelance Developer",
           company: "Serbest",
           period: "2023 — 2024",
-          highlights: [
-            "KOBİ müşterilere uçtan uca production web uygulamaları teslim ettim",
-          ],
-          stack: ["Next.js", "TypeScript", "Vercel"],
         },
       ],
     },
@@ -429,18 +358,6 @@ AWS S3 + PostgreSQL`,
         },
       ],
     },
-    projects: {
-      heading: "Diğer Projeler",
-      items: [
-        {
-          name: "IMDb Clone",
-          description:
-            "JWT auth, Redis caching, Cloudinary entegrasyonu ve her PR'da otomatik test çalıştıran CI/CD pipeline'lı film veritabanı API'si.",
-          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "Docker", "GitHub Actions"],
-          github: "https://github.com/onurmacit/imdb-clone-backend",
-        },
-      ],
-    },
     writing: {
       heading: "Yazılar",
       text:
@@ -453,26 +370,6 @@ AWS S3 + PostgreSQL`,
         "Celery Retry Pattern'leri",
         "PostgreSQL Sorgu Optimizasyonu",
         "Screenshotbeam Mimarisi",
-      ],
-    },
-    education: {
-      heading: "Eğitim",
-      items: [
-        {
-          degree: "Bilgisayar Programcılığı",
-          school: "Karadeniz Teknik Üniversitesi",
-          period: "2020 — 2024",
-        },
-      ],
-    },
-    skills: {
-      heading: "Yetenekler",
-      groups: [
-        { label: "Diller", items: ["Python", "Go", "TypeScript", "JavaScript", "C#", "SQL"] },
-        { label: "Backend & API", items: ["Django", "DRF", "FastAPI", "Flask", "REST API Tasarımı", "JWT"] },
-        { label: "Veri & Cache", items: ["PostgreSQL", "Redis", "Celery", "Sorgu Optimizasyonu", "Alembic"] },
-        { label: "Bulut & Altyapı", items: ["AWS", "Docker", "CI/CD", "GitHub Actions"] },
-        { label: "Kalite", items: ["Pytest", "Structured Logging"] },
       ],
     },
     contact: {
