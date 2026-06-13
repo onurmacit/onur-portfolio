@@ -3,7 +3,7 @@
 import { useLanguage } from "./LanguageProvider";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
-import type { Project, ProjectStory } from "@/lib/content";
+import type { ExperienceProject, Project, ProjectStory } from "@/lib/content";
 
 const SECTION = "mx-auto max-w-3xl px-6 py-16";
 
@@ -69,8 +69,8 @@ export function Experience() {
               </div>
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">{job.summary}</p>
               {job.project && (
-                <div className="mt-8 border-l-2 border-accent/30 pl-6">
-                  <ProjectBlock project={job.project} nested />
+                <div className="mt-6">
+                  <ExperienceProjectBlock project={job.project} />
                 </div>
               )}
             </div>
@@ -170,13 +170,45 @@ export function Footer() {
   );
 }
 
-function ProjectBlock({
-  project,
-  nested = false,
-}: {
-  project: Project;
-  nested?: boolean;
-}) {
+function ExperienceProjectBlock({ project }: { project: ExperienceProject }) {
+  const { lang } = useLanguage();
+  const visitLabel = lang === "tr" ? "Site ↗" : "Visit ↗";
+
+  return (
+    <article>
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
+        <h4 className="font-serif text-lg font-medium">{project.name}</h4>
+        {project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-accent transition-opacity hover:opacity-80"
+          >
+            {visitLabel}
+          </a>
+        )}
+      </div>
+      {project.tagline && <p className="mt-1 text-sm text-muted">{project.tagline}</p>}
+      <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">{project.intro}</p>
+      <ul className="mt-4 max-w-xl space-y-2">
+        {project.highlights.map((item) => (
+          <li key={item} className="flex gap-2.5 text-sm leading-relaxed text-muted">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-5 flex flex-wrap gap-2">
+        {project.stack.map((tech) => (
+          <Tag key={tech}>{tech}</Tag>
+        ))}
+      </div>
+    </article>
+  );
+}
+
+function ProjectBlock({ project }: { project: Project }) {
   const { lang } = useLanguage();
   const href = project.link ?? project.github;
   const extraLinks = project.links?.filter((link) => link.url !== href) ?? [];
@@ -184,11 +216,9 @@ function ProjectBlock({
   const sourceLabel = lang === "tr" ? "Kaynak ↗" : "Source ↗";
 
   return (
-    <article className={nested ? "" : "border-b border-line pb-10 last:border-b-0 last:pb-0"}>
+    <article className="border-b border-line pb-10 last:border-b-0 last:pb-0">
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <h4 className={`font-serif font-medium ${nested ? "text-lg" : "text-2xl"}`}>
-          {project.name}
-        </h4>
+        <h4 className="font-serif text-2xl font-medium">{project.name}</h4>
         {href && (
           <a
             href={href}

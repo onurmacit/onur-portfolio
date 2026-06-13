@@ -22,12 +22,21 @@ export interface Project {
   links?: { label: string; url: string }[];
 }
 
+export interface ExperienceProject {
+  name: string;
+  tagline?: string;
+  intro: string;
+  highlights: string[];
+  stack: string[];
+  link?: string;
+}
+
 export interface ExperienceEntry {
   role: string;
   company: string;
   period: string;
   summary: string;
-  project?: Project;
+  project?: ExperienceProject;
 }
 
 export interface Content {
@@ -93,18 +102,13 @@ export const content: Record<Lang, Content> = {
           project: {
             name: "Apparelte",
             tagline: "Fashion social platform",
-            story: {
-              context:
-                "Live social product: scroll-heavy feed, image uploads from mobile, engagement signals driving ranking.",
-              constraint:
-                "Image processing inside the request cycle blocked responses for ~3.2s. Feed queries hit PostgreSQL on every page load. Staying a Django monolith; solo dev, deploy speed over service boundaries.",
-              decision:
-                "Moved media to a Celery + AWS async pipeline; API returns immediately with a job reference. Layered Redis for personalized feeds with narrow, engagement-based invalidation, not cache-the-whole-feed. Rejected GraphQL and microservices for this stage.",
-              outcome:
-                "Upload path: 3.2s → 480ms. ~70% fewer redundant feed queries. Hot endpoints down to ~18ms average DB response.",
-              lesson:
-                "Race condition in production: a post could surface in the feed before Celery committed the media URL. Publish and worker completion were racing. Fixed with a post status gate (`media_ready` must be committed before feed invalidation), `select_for_update` on publish, and Celery idempotency keys per post so client retries don't enqueue duplicate jobs.",
-            },
+            intro:
+              "Async media pipeline and Redis-layered feeds on a live Django monolith.",
+            highlights: [
+              "Upload latency: 3.2s → 480ms; ~70% fewer redundant feed queries",
+              "Kept monolith over microservices; rejected GraphQL at this stage",
+              "Fixed a publish/worker race with status gates and idempotent Celery jobs",
+            ],
             stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
             link: "https://apparelte.com/",
           },
@@ -192,18 +196,13 @@ export const content: Record<Lang, Content> = {
           project: {
             name: "Apparelte",
             tagline: "Moda sosyal platform",
-            story: {
-              context:
-                "Canlı sosyal ürün: feed scroll ağırlıklı, mobilde görsel upload, engagement sinyalleriyle sıralama.",
-              constraint:
-                "Görsel işleme request içindeydi ve yanıtı ~3.2s bloke ediyordu. Feed sorguları her sayfa yüklemesinde PostgreSQL'e gidiyordu. Tek developer olduğum için Django monolith'te kaldım; deploy hızı, service boundary çizmekten önce geldi.",
-              decision:
-                "Medyayı Celery + AWS async pipeline'a taşıdım; API hemen job referansı döndürüyor. Kişiselleştirilmiş feed için Redis katmanı, tüm feed'i değil, dar engagement tabanlı invalidation. Bu aşamada GraphQL ve microservice'i bilinçli olarak seçmedim.",
-              outcome:
-                "Upload yolu: 3.2s → 480ms. ~%70 daha az gereksiz feed sorgusu. Hot endpoint'lerde ~18ms ortalama DB yanıtı.",
-              lesson:
-                "Production'da race condition: post, Celery media URL'ini commit etmeden feed'de görünebiliyordu. Publish ile worker completion yarışıyordu. `media_ready` commit edilmeden feed invalidation yok, publish'te `select_for_update`, post başına Celery idempotency key ile client retry'ların duplicate job üretmesini kestim.",
-            },
+            intro:
+              "Canlı Django monolith üzerinde async media pipeline ve Redis katmanlı feed'ler.",
+            highlights: [
+              "Upload gecikmesi: 3.2s → 480ms; ~%70 daha az gereksiz feed sorgusu",
+              "Microservice yerine monolith; bu aşamada GraphQL bilinçli olarak seçilmedi",
+              "Publish/worker race'ini status gate ve idempotent Celery job'larıyla çözdüm",
+            ],
             stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
             link: "https://apparelte.com/",
           },
