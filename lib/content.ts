@@ -76,7 +76,7 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "I build production backends with Python and Go. Sole backend for Apparelte at Vyrin Lab and Screenshotbeam as a side project.",
+        "I turn product requirements into reliable backends: APIs, data flows, and infra that holds up under real traffic.",
       note: "Full metrics and work history are in my CV. This site covers what I shipped and how I approached it.",
       cta: "Get in touch",
       ctaResume: "Resume ↓",
@@ -175,7 +175,7 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "Python ve Go ile production backend geliştiriyorum. Vyrin Lab'de Apparelte'nin, yan projem Screenshotbeam'in tek backend sahibiyim.",
+        "Ürün ihtiyaçlarını güvenilir backend'lere çeviriyorum: API'ler, veri akışları ve gerçek trafikte ayakta kalan sistemler.",
       note: "Metrikler ve tam iş geçmişi CV'mde. Bu site ne ship ettiğimi ve nasıl yaklaştığımı anlatıyor.",
       cta: "İletişime geç",
       ctaResume: "CV ↓",
