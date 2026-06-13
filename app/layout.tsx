@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "@/components/LanguageProvider";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { TimeThemeScript } from "@/components/TimeThemeScript";
 import "./globals.css";
 
 const inter = Inter({
@@ -48,9 +50,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${fraunces.variable} antialiased`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${fraunces.variable} antialiased`}
+      suppressHydrationWarning
+    >
+      <head>
+        <TimeThemeScript />
+      </head>
       <body className="min-h-screen">
-        <LanguageProvider>{children}</LanguageProvider>
+        <ThemeProvider>
+          <LanguageProvider>{children}</LanguageProvider>
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

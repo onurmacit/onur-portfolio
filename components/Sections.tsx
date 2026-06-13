@@ -272,7 +272,7 @@ function ProjectStory({ story }: { story: ProjectStory }) {
         </div>
       ))}
       {story.lesson && (
-        <div className="rounded-xl border border-line bg-white/50 px-4 py-3">
+        <div className="rounded-xl border border-line bg-surface px-4 py-3">
           <dt className="text-xs font-medium uppercase tracking-widest text-subtle">
             {labels.lesson}
           </dt>
@@ -285,7 +285,7 @@ function ProjectStory({ story }: { story: ProjectStory }) {
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <span className="rounded-full border border-line bg-white/70 px-2.5 py-0.5 text-xs text-muted">
+    <span className="rounded-full border border-line bg-surface px-2.5 py-0.5 text-xs text-muted">
       {children}
     </span>
   );
