@@ -131,7 +131,7 @@ export const content: Record<Lang, Content> = {
             {
               type: "link",
               label: "korkmazelektrik",
-              url: "https://korkmazelektrik.com",
+              url: "https://korkmazelektrik.tr/",
             },
             { type: "text", value: " and " },
             {
@@ -241,7 +241,7 @@ export const content: Record<Lang, Content> = {
             {
               type: "link",
               label: "korkmazelektrik",
-              url: "https://korkmazelektrik.com",
+              url: "https://korkmazelektrik.tr/",
             },
             { type: "text", value: " ve " },
             {

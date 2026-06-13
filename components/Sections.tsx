@@ -192,7 +192,7 @@ function ExperienceSummary({
               href={part.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground underline decoration-accent/60 underline-offset-4 transition-colors hover:text-accent"
+              className="text-sm text-accent transition-opacity hover:opacity-80"
             >
               {part.label}
             </a>
