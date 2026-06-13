@@ -14,20 +14,17 @@ export interface Project {
   name: string;
   tagline?: string;
   description: string;
-  why?: string;
   caseStudy?: string[];
   stack: string[];
-  highlights?: string[];
-  architecture?: string;
   metric?: string;
   link?: string;
   github?: string;
+  links?: { label: string; url: string }[];
 }
 
 export interface Content {
   nav: {
     work: string;
-    products: string;
     writing: string;
     contact: string;
   };
@@ -36,29 +33,19 @@ export interface Content {
     name: string;
     title: string;
     intro: string;
-    currentWork: string;
-    focusAreas: string[];
-    availability: string;
+    note: string;
     cta: string;
-    ctaSecondary: string;
     ctaResume: string;
   };
-  stats: { value: string; label: string }[];
-  featured: {
-    label: string;
-    project: Project & {
-      links: { label: string; url: string }[];
-    };
-  };
+  work: { heading: string };
+  featured: { project: Project };
   timeline: { heading: string; items: TimelineEntry[] };
-  products: { heading: string; items: Project[] };
+  products: { items: Project[] };
   writing: {
     heading: string;
     text: string;
-    topicsLabel: string;
     cta: string;
     url: string;
-    topics: string[];
   };
   contact: {
     heading: string;
@@ -73,7 +60,6 @@ export const content: Record<Lang, Content> = {
   en: {
     nav: {
       work: "Work",
-      products: "Products",
       writing: "Writing",
       contact: "Contact",
     },
@@ -82,141 +68,64 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "I build backends that survive real traffic — not demos. Sole backend behind Apparelte (live social platform) and Screenshotbeam (screenshot SaaS I took from Playwright prototype to Go microservice).",
-      currentWork:
-        "Metrics, skills, and full work history live in my CV. This site is where I show how I think and what I shipped.",
-      focusAreas: [
-        "Memory-bound → Go",
-        "Feed perf under load",
-        "Solo backend ownership",
-        "Async pipelines",
-      ],
-      availability: "Open to new opportunities",
+        "I build production backends with Python and Go. Sole backend for Apparelte and Screenshotbeam.",
+      note: "Full metrics and work history are in my CV. This site covers what I shipped and how I approached it.",
       cta: "Get in touch",
-      ctaSecondary: "View Screenshotbeam",
       ctaResume: "Resume ↓",
     },
-    stats: [
-      { value: "200→50MB", label: "Playwright → Go idle memory" },
-      { value: "3.2s→480ms", label: "Async upload pipeline" },
-      { value: "~2s", label: "Cold-start eliminated per render" },
-      { value: "4-tier", label: "API rate limiting" },
-    ],
+    work: { heading: "Work" },
+    products: {
+      items: [
+        {
+          name: "Apparelte",
+          tagline: "Fashion social platform",
+          description:
+            "Live social platform. I own the backend: APIs, feed caching, and async media processing.",
+          caseStudy: [
+            "Uploads blocked requests at 3.2s — moved media to Celery + AWS.",
+            "Feed hit the DB every load — added Redis with engagement-based invalidation.",
+            "Result: 3.2s → 480ms uploads, 70% fewer DB queries, 18ms on hot endpoints.",
+          ],
+          metric: "85% upload latency reduction",
+          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
+          link: "https://apparelte.com/",
+        },
+      ],
+    },
     featured: {
-      label: "Featured Project",
       project: {
         name: "Screenshotbeam",
-        tagline: "Production SaaS for website screenshots",
+        tagline: "Screenshot SaaS",
         description:
-          "Distributed microservice architecture with a FastAPI orchestrator and a dedicated Go rendering engine. Built to handle concurrent screenshot jobs with browser pooling, rate limiting, and Stripe billing.",
-        why:
-          "Started with Playwright in Python but hit memory limits (~200MB per instance) and cold-start latency (~2s per request). Replaced it with a Go renderer (Fiber + go-rod) and a pre-warmed browser pool — eliminated the Node.js dependency and cut idle memory to ~50MB.",
+          "FastAPI orchestrator + Go rendering engine. Browser pool, rate limiting, Stripe billing.",
         caseStudy: [
-          "Problem: Playwright renderer was memory-heavy and incurred a cold-start penalty on every new browser session.",
-          "Decision: Split into FastAPI orchestrator (auth, billing, jobs) + dedicated Go rendering microservice with round-robin browser pool.",
-          "Result: ~75% memory reduction, ~2s saved per request, SSRF protection, 4-tier rate limiting, and Stripe billing integrated.",
+          "Playwright used ~200MB/instance with ~2s cold starts per render.",
+          "Replaced with Go (Fiber + go-rod) and a pre-warmed browser pool.",
+          "Result: ~50MB idle memory, ~2s saved per request, SSRF protection, 4-tier rate limiting.",
         ],
-        highlights: [
-          "Go Renderer",
-          "Browser Pool",
-          "Redis",
-          "PostgreSQL",
-          "Stripe",
-          "Docker",
-          "SSRF Protection",
-        ],
-        metric: "Memory usage reduced by 75% (~200MB → ~50MB idle)",
-        architecture: `User
-  ↓
-FastAPI API (auth, billing, jobs)
-  ↓
-Redis Queue
-  ↓
-Go Renderer (Fiber + go-rod)
-  ↓
-Browser Pool (Chrome instances)
-  ↓
-S3 + CDN`,
-        stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
+        metric: "75% memory reduction (200MB → 50MB idle)",
+        stack: ["Go", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
         link: "https://www.screenshotbeam.com/",
         github: "https://github.com/onurmacit/screenshot-api",
-        links: [
-          { label: "Visit Site", url: "https://www.screenshotbeam.com/" },
-          { label: "View Architecture", url: "https://github.com/onurmacit/screenshot-api" },
-          { label: "View Source", url: "https://github.com/onurmacit/screenshot-api" },
-        ],
+        links: [{ label: "Source", url: "https://github.com/onurmacit/screenshot-api" }],
       },
     },
     timeline: {
       heading: "Background",
       items: [
-        {
-          role: "Backend Developer",
-          company: "Vyrin Lab",
-          period: "2024 — Present",
-        },
-        {
-          role: "Freelance Developer",
-          company: "Self-employed",
-          period: "2023 — 2024",
-        },
-      ],
-    },
-    products: {
-      heading: "Production Products",
-      items: [
-        {
-          name: "Apparelte",
-          tagline: "Fashion social platform · production",
-          description:
-            "Sole backend owner for a live social platform. Designed backend architecture, engagement-based feed ranking, async media processing, and API layer serving real users.",
-          why:
-            "Built the entire backend solo — from API design to production deployment. The hardest problems were feed performance under load and async media processing without blocking the upload flow.",
-          caseStudy: [
-            "Problem: Image uploads blocked the request cycle (3.2s latency) and feed queries hit the DB on every page load.",
-            "Decision: Offloaded media to Celery + AWS async pipeline; layered Redis cache with engagement-based feed invalidation.",
-            "Result: 85% upload latency reduction (3.2s → 480ms), 70% fewer redundant DB queries, 18ms average response on hot endpoints.",
-          ],
-          highlights: [
-            "40+ REST endpoints",
-            "Engagement feed algorithm",
-            "Redis feed caching",
-            "Celery media pipeline",
-          ],
-          metric: "85% upload latency reduction · 70% fewer DB queries",
-          architecture: `Mobile / Web Client
-  ↓
-Django REST API (40+ endpoints)
-  ↓
-Feed Engine (engagement signals + ranking)
-  ↓
-Redis (personalized feed cache)
-  ↓
-Celery Workers (async media)
-  ↓
-AWS S3 + PostgreSQL`,
-          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery", "JWT"],
-          link: "https://apparelte.com/",
-        },
+        { role: "Backend Developer", company: "Vyrin Lab", period: "2024 — Present" },
+        { role: "Freelance Developer", company: "Self-employed", period: "2023 — 2024" },
       ],
     },
     writing: {
       heading: "Writing",
-      text:
-        "Technical case studies from my production work live on this portfolio. I also explore backend architecture and performance topics on Medium.",
-      topicsLabel: "Topics I explore",
-      cta: "Medium Profile",
+      text: "I write about backend architecture and production lessons on Medium.",
+      cta: "Medium",
       url: "https://medium.com/@onurmaciit",
-      topics: [
-        "Redis Cache Strategies",
-        "Celery Retry Patterns",
-        "PostgreSQL Query Optimization",
-        "Building Screenshotbeam Architecture",
-      ],
     },
     contact: {
       heading: "Contact",
-      text: "Looking for backend roles where I can own systems end to end. If you're building production SaaS, let's talk.",
+      text: "Open to backend roles where I can own systems end to end.",
       email: "onurmaciit@gmail.com",
       links: [
         { label: "GitHub", url: "https://github.com/onurmacit" },
@@ -231,7 +140,6 @@ AWS S3 + PostgreSQL`,
   tr: {
     nav: {
       work: "İşler",
-      products: "Ürünler",
       writing: "Yazılar",
       contact: "İletişim",
     },
@@ -240,141 +148,64 @@ AWS S3 + PostgreSQL`,
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "Demo değil, gerçek trafiğe dayanan backend'ler inşa ediyorum. Apparelte'nin (canlı sosyal platform) ve Screenshotbeam'in (Playwright prototipinden Go microservice'e) tek backend sahibiyim.",
-      currentWork:
-        "Metrikler, yetenekler ve tam iş geçmişi CV'mde. Bu site nasıl düşündüğümü ve ne ship ettiğimi anlatıyor.",
-      focusAreas: [
-        "Bellek limiti → Go",
-        "Feed performansı",
-        "Tek backend sahipliği",
-        "Async pipeline'lar",
-      ],
-      availability: "Yeni fırsatlara açığım",
+        "Python ve Go ile production backend geliştiriyorum. Apparelte ve Screenshotbeam'in tek backend sahibiyim.",
+      note: "Metrikler ve tam iş geçmişi CV'mde. Bu site ne ship ettiğimi ve nasıl yaklaştığımı anlatıyor.",
       cta: "İletişime geç",
-      ctaSecondary: "Screenshotbeam'i gör",
       ctaResume: "CV ↓",
     },
-    stats: [
-      { value: "200→50MB", label: "Playwright → Go idle bellek" },
-      { value: "3.2s→480ms", label: "Async upload pipeline" },
-      { value: "~2s", label: "Render cold-start kaldırıldı" },
-      { value: "4 kademe", label: "API rate limiting" },
-    ],
+    work: { heading: "İşler" },
+    products: {
+      items: [
+        {
+          name: "Apparelte",
+          tagline: "Moda sosyal platform",
+          description:
+            "Canlı sosyal platform. Backend bende: API'lar, feed cache ve async medya işleme.",
+          caseStudy: [
+            "Upload'lar 3.2s'de request'i blokluyordu — medyayı Celery + AWS'e taşıdım.",
+            "Feed her yüklemede DB'ye gidiyordu — engagement tabanlı Redis cache ekledim.",
+            "Sonuç: 3.2s → 480ms upload, %70 daha az DB sorgusu, hot endpoint'lerde 18ms.",
+          ],
+          metric: "%85 upload gecikmesi azaltma",
+          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
+          link: "https://apparelte.com/",
+        },
+      ],
+    },
     featured: {
-      label: "Öne Çıkan Proje",
       project: {
         name: "Screenshotbeam",
-        tagline: "Website screenshot'ları için production SaaS",
+        tagline: "Screenshot SaaS",
         description:
-          "FastAPI orchestrator ve Go rendering engine ile dağıtık microservice mimarisi. Browser pooling, rate limiting ve Stripe billing ile concurrent screenshot işleri.",
-        why:
-          "Python Playwright ile başladım ama bellek limitine (~200MB/instance) ve cold-start gecikmesine (~2s/istek) takıldım. Go renderer (Fiber + go-rod) ve pre-warmed browser pool ile değiştirdim — Node.js bağımlılığını kaldırdım, idle belleği ~50MB'a düşürdüm.",
+          "FastAPI orchestrator + Go rendering engine. Browser pool, rate limiting, Stripe billing.",
         caseStudy: [
-          "Problem: Playwright renderer bellek tüketimi yüksekti ve her yeni browser session'da cold-start cezası vardı.",
-          "Karar: FastAPI orchestrator (auth, billing, jobs) + round-robin browser pool'lu Go rendering microservice.",
-          "Sonuç: ~%75 bellek azaltma, istek başına ~2s tasarruf, SSRF koruması, 4 kademeli rate limiting ve Stripe billing.",
+          "Playwright ~200MB/instance ve render başına ~2s cold start alıyordu.",
+          "Go (Fiber + go-rod) ve pre-warmed browser pool ile değiştirdim.",
+          "Sonuç: ~50MB idle bellek, istek başına ~2s tasarruf, SSRF koruması, 4 kademeli rate limiting.",
         ],
-        highlights: [
-          "Go Renderer",
-          "Browser Pool",
-          "Redis",
-          "PostgreSQL",
-          "Stripe",
-          "Docker",
-          "SSRF Protection",
-        ],
-        metric: "Bellek kullanımı %75 azaltıldı (~200MB → ~50MB idle)",
-        architecture: `User
-  ↓
-FastAPI API (auth, billing, jobs)
-  ↓
-Redis Queue
-  ↓
-Go Renderer (Fiber + go-rod)
-  ↓
-Browser Pool (Chrome instances)
-  ↓
-S3 + CDN`,
-        stack: ["Go", "Fiber", "go-rod", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
+        metric: "%75 bellek azaltma (200MB → 50MB idle)",
+        stack: ["Go", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
         link: "https://www.screenshotbeam.com/",
         github: "https://github.com/onurmacit/screenshot-api",
-        links: [
-          { label: "Siteyi Gör", url: "https://www.screenshotbeam.com/" },
-          { label: "Mimariyi Gör", url: "https://github.com/onurmacit/screenshot-api" },
-          { label: "Kaynak Kod", url: "https://github.com/onurmacit/screenshot-api" },
-        ],
+        links: [{ label: "Kaynak Kod", url: "https://github.com/onurmacit/screenshot-api" }],
       },
     },
     timeline: {
       heading: "Arka Plan",
       items: [
-        {
-          role: "Backend Developer",
-          company: "Vyrin Lab",
-          period: "2024 — Günümüz",
-        },
-        {
-          role: "Freelance Developer",
-          company: "Serbest",
-          period: "2023 — 2024",
-        },
-      ],
-    },
-    products: {
-      heading: "Production Ürünler",
-      items: [
-        {
-          name: "Apparelte",
-          tagline: "Moda sosyal platform · production",
-          description:
-            "Canlı sosyal platformun tek backend sahibi. Backend mimarisi, etkileşim tabanlı feed sıralama, async medya işleme ve gerçek kullanıcılara hizmet veren API katmanı.",
-          why:
-            "Backend'i tek başıma kurdum — API tasarımından production deploy'a kadar. En zor problemler feed performansı ve upload akışını bloklamadan async medya işleme oldu.",
-          caseStudy: [
-            "Problem: Resim yüklemeleri request cycle'ı blokluyordu (3.2s gecikme) ve feed sorguları her sayfa yüklemesinde DB'ye gidiyordu.",
-            "Karar: Medyayı Celery + AWS async pipeline'a taşıdım; engagement tabanlı feed invalidation ile Redis cache katmanı kurdum.",
-            "Sonuç: %85 upload gecikmesi azaltma (3.2s → 480ms), %70 daha az gereksiz DB sorgusu, hot endpoint'lerde 18ms ortalama yanıt.",
-          ],
-          highlights: [
-            "40+ REST endpoint",
-            "Engagement feed algoritması",
-            "Redis feed cache",
-            "Celery medya pipeline",
-          ],
-          metric: "%85 upload gecikmesi azaltma · %70 daha az DB sorgusu",
-          architecture: `Mobile / Web Client
-  ↓
-Django REST API (40+ endpoint)
-  ↓
-Feed Engine (engagement signals + ranking)
-  ↓
-Redis (personalized feed cache)
-  ↓
-Celery Workers (async media)
-  ↓
-AWS S3 + PostgreSQL`,
-          stack: ["Django", "DRF", "PostgreSQL", "AWS", "Redis", "Celery", "JWT"],
-          link: "https://apparelte.com/",
-        },
+        { role: "Backend Developer", company: "Vyrin Lab", period: "2024 — Günümüz" },
+        { role: "Freelance Developer", company: "Serbest", period: "2023 — 2024" },
       ],
     },
     writing: {
       heading: "Yazılar",
-      text:
-        "Production çalışmalarımdan teknik case study'ler bu portfolyoda. Backend mimarisi ve performans konularını Medium'da da paylaşıyorum.",
-      topicsLabel: "İncelediğim konular",
-      cta: "Medium Profili",
+      text: "Backend mimarisi ve production derslerini Medium'da paylaşıyorum.",
+      cta: "Medium",
       url: "https://medium.com/@onurmaciit",
-      topics: [
-        "Redis Cache Stratejileri",
-        "Celery Retry Pattern'leri",
-        "PostgreSQL Sorgu Optimizasyonu",
-        "Screenshotbeam Mimarisi",
-      ],
     },
     contact: {
       heading: "İletişim",
-      text: "Sistemleri uçtan uca sahiplenebileceğim backend roller arıyorum. Production SaaS inşa ediyorsanız konuşalım.",
+      text: "Sistemleri uçtan uca sahiplenebileceğim backend roller arıyorum.",
       email: "onurmaciit@gmail.com",
       links: [
         { label: "GitHub", url: "https://github.com/onurmacit" },

@@ -1,14 +1,5 @@
 import { Nav } from "@/components/Nav";
-import {
-  Hero,
-  Stats,
-  Featured,
-  Products,
-  Timeline,
-  Writing,
-  Contact,
-  Footer,
-} from "@/components/Sections";
+import { Hero, Work, Writing, Contact, Footer } from "@/components/Sections";
 
 export default function Home() {
   return (
@@ -16,10 +7,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Stats />
-        <Featured />
-        <Products />
-        <Timeline />
+        <Work />
         <Writing />
         <Contact />
       </main>

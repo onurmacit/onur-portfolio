@@ -3,63 +3,41 @@
 import { useLanguage } from "./LanguageProvider";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
+import type { Project } from "@/lib/content";
+
+const SECTION = "mx-auto max-w-3xl px-6 py-16";
 
 export function Hero() {
   const { t } = useLanguage();
   return (
-    <section id="top" className="mx-auto flex min-h-[70vh] max-w-3xl flex-col justify-center px-6 pt-16 pb-8">
+    <section id="top" className={`${SECTION} flex flex-col justify-center pt-24 pb-10`}>
       <Reveal>
-        <span className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-line bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-50" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-          </span>
-          {t.hero.availability}
-        </span>
-      </Reveal>
-
-      <Reveal delay={100}>
-        <p className="mb-3 text-lg text-muted">{t.hero.greeting}</p>
-        <h1 className="font-serif text-5xl font-medium leading-[1.1] tracking-tight sm:text-7xl">
+        <p className="mb-3 text-sm text-muted">{t.hero.greeting}</p>
+        <h1 className="font-serif text-4xl font-medium leading-[1.1] tracking-tight sm:text-6xl">
           {t.hero.name}
           <span className="text-accent">.</span>
         </h1>
-        <p className="mt-4 font-serif text-2xl text-muted sm:text-3xl">{t.hero.title}</p>
+        <p className="mt-3 font-serif text-xl text-muted sm:text-2xl">{t.hero.title}</p>
       </Reveal>
 
-      <Reveal delay={200}>
-        <p className="mt-8 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-          {t.hero.intro}
-        </p>
-        <p className="mt-3 text-sm font-medium text-foreground">{t.hero.currentWork}</p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {t.hero.focusAreas.map((area) => (
-            <Tag key={area} accent>
-              {area}
-            </Tag>
-          ))}
-        </div>
+      <Reveal delay={80}>
+        <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">{t.hero.intro}</p>
+        <p className="mt-4 text-sm text-subtle">{t.hero.note}</p>
       </Reveal>
 
-      <Reveal delay={300}>
-        <div className="mt-10 flex flex-wrap gap-4">
+      <Reveal delay={160}>
+        <div className="mt-8 flex flex-wrap gap-3">
           <a
             href="#contact"
-            className="rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-opacity hover:opacity-80"
+            className="rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-80"
           >
             {t.hero.cta}
-          </a>
-          <a
-            href="#featured"
-            className="rounded-full border border-line px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-          >
-            {t.hero.ctaSecondary}
           </a>
           <a
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-full border border-line px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+            className="rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
           >
             {t.hero.ctaResume}
           </a>
@@ -69,178 +47,22 @@ export function Hero() {
   );
 }
 
-export function Stats() {
+export function Work() {
   const { t } = useLanguage();
-  return (
-    <section className="mx-auto max-w-3xl px-6 pb-8">
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-        {t.stats.map((stat, i) => (
-          <Reveal key={stat.label} delay={i * 60}>
-            <div className="rounded-2xl border border-line bg-white/60 p-5 text-center">
-              <p className="font-serif text-3xl font-medium text-accent">{stat.value}</p>
-              <p className="mt-1 text-xs text-muted">{stat.label}</p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
+  const projects: (Project & { links?: { label: string; url: string }[] })[] = [
+    ...t.products.items,
+    t.featured.project,
+  ];
 
-export function Featured() {
-  const { lang, t } = useLanguage();
-  const p = t.featured.project;
   return (
-    <section id="featured" className="mx-auto max-w-3xl px-6 py-24">
+    <section id="work" className={SECTION}>
       <Reveal>
-        <p className="mb-2 text-xs font-medium uppercase tracking-widest text-accent">
-          {t.featured.label}
-        </p>
-        <h2 className="font-serif text-3xl font-medium sm:text-4xl">{p.name}</h2>
-        <p className="mt-2 text-muted">{p.tagline}</p>
+        <SectionHeading title={t.work.heading} />
       </Reveal>
-
-      <Reveal delay={100}>
-        <div className="mt-8 rounded-2xl border border-accent/20 bg-white/70 p-7 sm:p-8">
-          <p className="leading-relaxed text-muted">{p.description}</p>
-
-          <ProjectCaseStudy lang={lang} why={p.why} caseStudy={p.caseStudy} />
-
-          {p.highlights && (
-            <div className="mt-5 flex flex-wrap gap-2">
-              {p.highlights.map((h) => (
-                <Tag key={h}>{h}</Tag>
-              ))}
-            </div>
-          )}
-
-          {p.metric && (
-            <p className="mt-6 rounded-xl border border-line bg-accent-soft px-4 py-3 text-sm font-medium text-accent">
-              {p.metric}
-            </p>
-          )}
-
-          {p.architecture && (
-            <div className="mt-6">
-              <p className="mb-3 text-xs font-medium uppercase tracking-widest text-subtle">
-                Architecture
-              </p>
-              <ArchitectureDiagram diagram={p.architecture} />
-            </div>
-          )}
-
-          <div className="mt-6 flex flex-wrap gap-2">
-            {p.stack.map((tech) => (
-              <Tag key={tech}>{tech}</Tag>
-            ))}
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            {p.links.map((link, i) => (
-              <a
-                key={link.label}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={
-                  i === 0
-                    ? "rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-80"
-                    : "rounded-full border border-line px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
-                }
-              >
-                {link.label} ↗
-              </a>
-            ))}
-          </div>
-        </div>
-      </Reveal>
-    </section>
-  );
-}
-
-export function Timeline() {
-  const { t } = useLanguage();
-  return (
-    <section id="background" className="mx-auto max-w-3xl px-6 py-12">
-      <Reveal>
-        <p className="mb-4 text-xs font-medium uppercase tracking-widest text-subtle">
-          {t.timeline.heading}
-        </p>
-      </Reveal>
-      <div className="space-y-3">
-        {t.timeline.items.map((entry, i) => (
-          <Reveal key={entry.company} delay={i * 60}>
-            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-line py-3 last:border-b-0">
-              <p className="font-serif text-base font-medium">
-                {entry.role}
-                <span className="text-muted"> · {entry.company}</span>
-              </p>
-              <p className="text-xs font-medium uppercase tracking-widest text-subtle">
-                {entry.period}
-              </p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export function Products() {
-  const { lang, t } = useLanguage();
-  return (
-    <section id="products" className="mx-auto max-w-3xl px-6 py-24">
-      <Reveal>
-        <SectionHeading number="01" title={t.products.heading} />
-      </Reveal>
-      <div className="space-y-8">
-        {t.products.items.map((product, i) => (
-          <Reveal key={product.name} delay={i * 100}>
-            <div className="rounded-2xl border border-line bg-white/60 p-7">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="font-serif text-2xl font-medium">{product.name}</h3>
-                  {product.tagline && (
-                    <p className="mt-1 text-sm text-muted">{product.tagline}</p>
-                  )}
-                </div>
-                {product.link && (
-                  <a
-                    href={product.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 text-sm text-accent hover:underline"
-                  >
-                    Visit ↗
-                  </a>
-                )}
-              </div>
-              <p className="mt-4 leading-relaxed text-muted">{product.description}</p>
-              <ProjectCaseStudy lang={lang} why={product.why} caseStudy={product.caseStudy} />
-              {product.highlights && (
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {product.highlights.map((h) => (
-                    <Tag key={h}>{h}</Tag>
-                  ))}
-                </div>
-              )}
-              {product.metric && (
-                <p className="mt-4 text-sm font-medium text-accent">{product.metric}</p>
-              )}
-              {product.architecture && (
-                <div className="mt-6">
-                  <p className="mb-3 text-xs font-medium uppercase tracking-widest text-subtle">
-                    Architecture
-                  </p>
-                  <ArchitectureDiagram diagram={product.architecture} />
-                </div>
-              )}
-              <div className="mt-5 flex flex-wrap gap-2">
-                {product.stack.map((tech) => (
-                  <Tag key={tech}>{tech}</Tag>
-                ))}
-              </div>
-            </div>
+      <div className="space-y-10">
+        {projects.map((project, i) => (
+          <Reveal key={project.name} delay={i * 80}>
+            <ProjectBlock project={project} />
           </Reveal>
         ))}
       </div>
@@ -251,25 +73,17 @@ export function Products() {
 export function Writing() {
   const { t } = useLanguage();
   return (
-    <section id="writing" className="mx-auto max-w-3xl px-6 py-24">
+    <section id="writing" className={SECTION}>
       <Reveal>
-        <SectionHeading number="02" title={t.writing.heading} />
+        <SectionHeading title={t.writing.heading} />
       </Reveal>
-      <Reveal delay={100}>
-        <p className="max-w-2xl leading-relaxed text-muted">{t.writing.text}</p>
-        <p className="mt-6 text-xs font-medium uppercase tracking-widest text-subtle">
-          {t.writing.topicsLabel}
-        </p>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {t.writing.topics.map((topic) => (
-            <Tag key={topic}>{topic}</Tag>
-          ))}
-        </div>
+      <Reveal delay={80}>
+        <p className="max-w-xl leading-relaxed text-muted">{t.writing.text}</p>
         <a
           href={t.writing.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-8 inline-block rounded-full border border-line px-6 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent"
+          className="mt-6 inline-block text-sm font-medium text-accent transition-opacity hover:opacity-80"
         >
           {t.writing.cta} ↗
         </a>
@@ -281,19 +95,19 @@ export function Writing() {
 export function Contact() {
   const { t } = useLanguage();
   return (
-    <section id="contact" className="mx-auto max-w-3xl px-6 py-24">
+    <section id="contact" className={SECTION}>
       <Reveal>
-        <SectionHeading number="03" title={t.contact.heading} />
+        <SectionHeading title={t.contact.heading} />
       </Reveal>
-      <Reveal delay={100}>
+      <Reveal delay={80}>
         <p className="max-w-xl leading-relaxed text-muted">{t.contact.text}</p>
         <a
           href={`mailto:${t.contact.email}`}
-          className="mt-8 inline-block font-serif text-2xl font-medium text-foreground underline decoration-accent decoration-2 underline-offset-8 transition-colors hover:text-accent sm:text-3xl"
+          className="mt-6 inline-block font-serif text-xl font-medium text-foreground underline decoration-accent decoration-2 underline-offset-8 transition-colors hover:text-accent sm:text-2xl"
         >
           {t.contact.email}
         </a>
-        <div className="mt-10 flex flex-wrap gap-6">
+        <div className="mt-8 flex flex-wrap gap-5">
           {t.contact.links.map((link) => (
             <a
               key={link.label}
@@ -306,6 +120,27 @@ export function Contact() {
             </a>
           ))}
         </div>
+
+        <div className="mt-12 border-t border-line pt-8">
+          <p className="mb-4 text-xs font-medium uppercase tracking-widest text-subtle">
+            {t.timeline.heading}
+          </p>
+          <div className="space-y-2">
+            {t.timeline.items.map((entry) => (
+              <div
+                key={entry.company}
+                className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-sm"
+              >
+                <p className="text-muted">
+                  <span className="font-medium text-foreground">{entry.role}</span>
+                  {" · "}
+                  {entry.company}
+                </p>
+                <p className="text-xs uppercase tracking-widest text-subtle">{entry.period}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </Reveal>
     </section>
   );
@@ -315,7 +150,7 @@ export function Footer() {
   const { t } = useLanguage();
   return (
     <footer className="border-t border-line">
-      <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-8">
+      <div className="mx-auto flex max-w-3xl items-center justify-between px-6 py-6">
         <p className="text-xs text-subtle">
           © {new Date().getFullYear()} — {t.footer}
         </p>
@@ -327,66 +162,78 @@ export function Footer() {
   );
 }
 
-function ProjectCaseStudy({
-  lang,
-  why,
-  caseStudy,
+function ProjectBlock({
+  project,
 }: {
-  lang: "en" | "tr";
-  why?: string;
-  caseStudy?: string[];
+  project: Project & { links?: { label: string; url: string }[] };
 }) {
-  if (!why && !caseStudy?.length) return null;
-
-  const whyLabel = lang === "tr" ? "Neden" : "Why";
-  const caseStudyLabel = lang === "tr" ? "Vaka Çalışması" : "Case Study";
+  const { lang } = useLanguage();
+  const href = project.link ?? project.github;
+  const extraLinks = project.links?.filter((link) => link.url !== href) ?? [];
+  const visitLabel = lang === "tr" ? "Site ↗" : "Visit ↗";
+  const sourceLabel = lang === "tr" ? "Kaynak ↗" : "Source ↗";
 
   return (
-    <div className="mt-6 space-y-5">
-      {why && (
-        <div>
-          <p className="mb-2 text-xs font-medium uppercase tracking-widest text-subtle">
-            {whyLabel}
-          </p>
-          <p className="text-sm leading-relaxed text-muted">{why}</p>
+    <article className="border-b border-line pb-10 last:border-b-0 last:pb-0">
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
+        <h3 className="font-serif text-2xl font-medium">{project.name}</h3>
+        {href && (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-accent transition-opacity hover:opacity-80"
+          >
+            {project.link ? visitLabel : sourceLabel}
+          </a>
+        )}
+      </div>
+      {project.tagline && <p className="mt-1 text-sm text-muted">{project.tagline}</p>}
+      <p className="mt-4 leading-relaxed text-muted">{project.description}</p>
+
+      {project.caseStudy && project.caseStudy.length > 0 && (
+        <ul className="mt-5 space-y-2">
+          {project.caseStudy.map((item) => (
+            <li key={item} className="flex gap-2 text-sm leading-relaxed text-muted">
+              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {project.metric && (
+        <p className="mt-5 text-sm font-medium text-accent">{project.metric}</p>
+      )}
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {project.stack.map((tech) => (
+          <Tag key={tech}>{tech}</Tag>
+        ))}
+      </div>
+
+      {extraLinks.length > 0 && (
+        <div className="mt-4 flex flex-wrap gap-4">
+          {extraLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-subtle transition-colors hover:text-accent"
+            >
+              {link.label} ↗
+            </a>
+          ))}
         </div>
       )}
-      {caseStudy && caseStudy.length > 0 && (
-        <div>
-          <p className="mb-3 text-xs font-medium uppercase tracking-widest text-subtle">
-            {caseStudyLabel}
-          </p>
-          <ul className="space-y-2">
-            {caseStudy.map((item) => (
-              <li key={item} className="flex gap-2 text-sm leading-relaxed text-muted">
-                <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+    </article>
   );
 }
 
-function ArchitectureDiagram({ diagram }: { diagram: string }) {
+function Tag({ children }: { children: React.ReactNode }) {
   return (
-    <pre className="overflow-x-auto rounded-xl border border-line bg-foreground px-5 py-4 font-mono text-xs leading-relaxed text-background/90 sm:text-sm">
-      {diagram}
-    </pre>
-  );
-}
-
-function Tag({ children, accent }: { children: React.ReactNode; accent?: boolean }) {
-  return (
-    <span
-      className={`rounded-full border px-3 py-1 text-xs ${
-        accent
-          ? "border-accent/30 bg-accent-soft text-accent"
-          : "border-line bg-white/70 text-muted"
-      }`}
-    >
+    <span className="rounded-full border border-line bg-white/70 px-2.5 py-0.5 text-xs text-muted">
       {children}
     </span>
   );
