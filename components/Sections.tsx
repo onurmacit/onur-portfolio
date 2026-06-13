@@ -47,20 +47,49 @@ export function Hero() {
   );
 }
 
-export function Work() {
+export function Experience() {
   const { t } = useLanguage();
-  const projects: (Project & { links?: { label: string; url: string }[] })[] = [
-    ...t.products.items,
-    t.featured.project,
-  ];
-
   return (
-    <section id="work" className={SECTION}>
+    <section id="experience" className={SECTION}>
       <Reveal>
-        <SectionHeading title={t.work.heading} />
+        <SectionHeading title={t.experience.heading} />
+      </Reveal>
+      <div className="space-y-12">
+        {t.experience.items.map((job, i) => (
+          <Reveal key={job.company} delay={i * 80}>
+            <div className="border-b border-line pb-12 last:border-b-0 last:pb-0">
+              <div className="flex flex-wrap items-baseline justify-between gap-3">
+                <h3 className="font-serif text-xl font-medium">
+                  {job.role}
+                  <span className="text-muted"> · {job.company}</span>
+                </h3>
+                <p className="text-xs font-medium uppercase tracking-widest text-subtle">
+                  {job.period}
+                </p>
+              </div>
+              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">{job.summary}</p>
+              {job.project && (
+                <div className="mt-8 border-l-2 border-accent/30 pl-6">
+                  <ProjectBlock project={job.project} nested />
+                </div>
+              )}
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export function Projects() {
+  const { t } = useLanguage();
+  return (
+    <section id="projects" className={SECTION}>
+      <Reveal>
+        <SectionHeading title={t.projects.heading} />
       </Reveal>
       <div className="space-y-10">
-        {projects.map((project, i) => (
+        {t.projects.items.map((project, i) => (
           <Reveal key={project.name} delay={i * 80}>
             <ProjectBlock project={project} />
           </Reveal>
@@ -120,27 +149,6 @@ export function Contact() {
             </a>
           ))}
         </div>
-
-        <div className="mt-12 border-t border-line pt-8">
-          <p className="mb-4 text-xs font-medium uppercase tracking-widest text-subtle">
-            {t.timeline.heading}
-          </p>
-          <div className="space-y-2">
-            {t.timeline.items.map((entry) => (
-              <div
-                key={entry.company}
-                className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-sm"
-              >
-                <p className="text-muted">
-                  <span className="font-medium text-foreground">{entry.role}</span>
-                  {" · "}
-                  {entry.company}
-                </p>
-                <p className="text-xs uppercase tracking-widest text-subtle">{entry.period}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </Reveal>
     </section>
   );
@@ -164,8 +172,10 @@ export function Footer() {
 
 function ProjectBlock({
   project,
+  nested = false,
 }: {
-  project: Project & { links?: { label: string; url: string }[] };
+  project: Project;
+  nested?: boolean;
 }) {
   const { lang } = useLanguage();
   const href = project.link ?? project.github;
@@ -174,9 +184,11 @@ function ProjectBlock({
   const sourceLabel = lang === "tr" ? "Kaynak ↗" : "Source ↗";
 
   return (
-    <article className="border-b border-line pb-10 last:border-b-0 last:pb-0">
+    <article className={nested ? "" : "border-b border-line pb-10 last:border-b-0 last:pb-0"}>
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <h3 className="font-serif text-2xl font-medium">{project.name}</h3>
+        <h4 className={`font-serif font-medium ${nested ? "text-lg" : "text-2xl"}`}>
+          {project.name}
+        </h4>
         {href && (
           <a
             href={href}

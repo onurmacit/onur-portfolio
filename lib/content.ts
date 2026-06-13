@@ -4,12 +4,6 @@
 
 export type Lang = "en" | "tr";
 
-export interface TimelineEntry {
-  role: string;
-  company: string;
-  period: string;
-}
-
 export interface Project {
   name: string;
   tagline?: string;
@@ -22,9 +16,18 @@ export interface Project {
   links?: { label: string; url: string }[];
 }
 
+export interface ExperienceEntry {
+  role: string;
+  company: string;
+  period: string;
+  summary: string;
+  project?: Project;
+}
+
 export interface Content {
   nav: {
-    work: string;
+    experience: string;
+    projects: string;
     writing: string;
     contact: string;
   };
@@ -37,10 +40,8 @@ export interface Content {
     cta: string;
     ctaResume: string;
   };
-  work: { heading: string };
-  featured: { project: Project };
-  timeline: { heading: string; items: TimelineEntry[] };
-  products: { items: Project[] };
+  experience: { heading: string; items: ExperienceEntry[] };
+  projects: { heading: string; items: Project[] };
   writing: {
     heading: string;
     text: string;
@@ -59,7 +60,8 @@ export interface Content {
 export const content: Record<Lang, Content> = {
   en: {
     nav: {
-      work: "Work",
+      experience: "Experience",
+      projects: "Projects",
       writing: "Writing",
       contact: "Contact",
     },
@@ -68,53 +70,63 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "I build production backends with Python and Go. Sole backend for Apparelte and Screenshotbeam.",
+        "I build production backends with Python and Go. Sole backend for Apparelte at Vyrin Lab and Screenshotbeam as a side project.",
       note: "Full metrics and work history are in my CV. This site covers what I shipped and how I approached it.",
       cta: "Get in touch",
       ctaResume: "Resume ↓",
     },
-    work: { heading: "Work" },
-    products: {
+    experience: {
+      heading: "Experience",
       items: [
         {
-          name: "Apparelte",
-          tagline: "Fashion social platform",
-          description:
-            "Live social platform. I own the backend: APIs, feed caching, and async media processing.",
-          caseStudy: [
-            "Uploads blocked requests at 3.2s — moved media to Celery + AWS.",
-            "Feed hit the DB every load — added Redis with engagement-based invalidation.",
-            "Result: 3.2s → 480ms uploads, 70% fewer DB queries, 18ms on hot endpoints.",
-          ],
-          metric: "85% upload latency reduction",
-          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
-          link: "https://apparelte.com/",
+          role: "Backend Developer",
+          company: "Vyrin Lab",
+          period: "2024 — Present",
+          summary:
+            "Sole backend developer on an early-stage product team. Own APIs, caching, and async pipelines for a live SaaS product.",
+          project: {
+            name: "Apparelte",
+            tagline: "Fashion social platform",
+            description:
+              "Live social platform. I own the backend: APIs, feed caching, and async media processing.",
+            caseStudy: [
+              "Uploads blocked requests at 3.2s — moved media to Celery + AWS.",
+              "Feed hit the DB every load — added Redis with engagement-based invalidation.",
+              "Result: 3.2s → 480ms uploads, 70% fewer DB queries, 18ms on hot endpoints.",
+            ],
+            metric: "85% upload latency reduction",
+            stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
+            link: "https://apparelte.com/",
+          },
+        },
+        {
+          role: "Freelance Developer",
+          company: "Self-employed",
+          period: "2023 — 2024",
+          summary:
+            "Delivered production web applications for SMB clients end to end, from requirements to deployment on Vercel.",
         },
       ],
     },
-    featured: {
-      project: {
-        name: "Screenshotbeam",
-        tagline: "Screenshot SaaS",
-        description:
-          "FastAPI orchestrator + Go rendering engine. Browser pool, rate limiting, Stripe billing.",
-        caseStudy: [
-          "Playwright used ~200MB/instance with ~2s cold starts per render.",
-          "Replaced with Go (Fiber + go-rod) and a pre-warmed browser pool.",
-          "Result: ~50MB idle memory, ~2s saved per request, SSRF protection, 4-tier rate limiting.",
-        ],
-        metric: "75% memory reduction (200MB → 50MB idle)",
-        stack: ["Go", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
-        link: "https://www.screenshotbeam.com/",
-        github: "https://github.com/onurmacit/screenshot-api",
-        links: [{ label: "Source", url: "https://github.com/onurmacit/screenshot-api" }],
-      },
-    },
-    timeline: {
-      heading: "Background",
+    projects: {
+      heading: "Projects",
       items: [
-        { role: "Backend Developer", company: "Vyrin Lab", period: "2024 — Present" },
-        { role: "Freelance Developer", company: "Self-employed", period: "2023 — 2024" },
+        {
+          name: "Screenshotbeam",
+          tagline: "Screenshot SaaS",
+          description:
+            "FastAPI orchestrator + Go rendering engine. Browser pool, rate limiting, Stripe billing.",
+          caseStudy: [
+            "Playwright used ~200MB/instance with ~2s cold starts per render.",
+            "Replaced with Go (Fiber + go-rod) and a pre-warmed browser pool.",
+            "Result: ~50MB idle memory, ~2s saved per request, SSRF protection, 4-tier rate limiting.",
+          ],
+          metric: "75% memory reduction (200MB → 50MB idle)",
+          stack: ["Go", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
+          link: "https://www.screenshotbeam.com/",
+          github: "https://github.com/onurmacit/screenshot-api",
+          links: [{ label: "Source", url: "https://github.com/onurmacit/screenshot-api" }],
+        },
       ],
     },
     writing: {
@@ -139,7 +151,8 @@ export const content: Record<Lang, Content> = {
 
   tr: {
     nav: {
-      work: "İşler",
+      experience: "Deneyim",
+      projects: "Projeler",
       writing: "Yazılar",
       contact: "İletişim",
     },
@@ -148,53 +161,63 @@ export const content: Record<Lang, Content> = {
       name: "Onur Macit",
       title: "Backend Developer",
       intro:
-        "Python ve Go ile production backend geliştiriyorum. Apparelte ve Screenshotbeam'in tek backend sahibiyim.",
+        "Python ve Go ile production backend geliştiriyorum. Vyrin Lab'de Apparelte'nin, yan projem Screenshotbeam'in tek backend sahibiyim.",
       note: "Metrikler ve tam iş geçmişi CV'mde. Bu site ne ship ettiğimi ve nasıl yaklaştığımı anlatıyor.",
       cta: "İletişime geç",
       ctaResume: "CV ↓",
     },
-    work: { heading: "İşler" },
-    products: {
+    experience: {
+      heading: "Deneyim",
       items: [
         {
-          name: "Apparelte",
-          tagline: "Moda sosyal platform",
-          description:
-            "Canlı sosyal platform. Backend bende: API'lar, feed cache ve async medya işleme.",
-          caseStudy: [
-            "Upload'lar 3.2s'de request'i blokluyordu — medyayı Celery + AWS'e taşıdım.",
-            "Feed her yüklemede DB'ye gidiyordu — engagement tabanlı Redis cache ekledim.",
-            "Sonuç: 3.2s → 480ms upload, %70 daha az DB sorgusu, hot endpoint'lerde 18ms.",
-          ],
-          metric: "%85 upload gecikmesi azaltma",
-          stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
-          link: "https://apparelte.com/",
+          role: "Backend Developer",
+          company: "Vyrin Lab",
+          period: "2024 — Günümüz",
+          summary:
+            "Erken aşama ürün ekibinde tek backend developer. Canlı SaaS ürünü için API, cache ve async pipeline'ları yönetiyorum.",
+          project: {
+            name: "Apparelte",
+            tagline: "Moda sosyal platform",
+            description:
+              "Canlı sosyal platform. Backend bende: API'lar, feed cache ve async medya işleme.",
+            caseStudy: [
+              "Upload'lar 3.2s'de request'i blokluyordu — medyayı Celery + AWS'e taşıdım.",
+              "Feed her yüklemede DB'ye gidiyordu — engagement tabanlı Redis cache ekledim.",
+              "Sonuç: 3.2s → 480ms upload, %70 daha az DB sorgusu, hot endpoint'lerde 18ms.",
+            ],
+            metric: "%85 upload gecikmesi azaltma",
+            stack: ["Django", "DRF", "PostgreSQL", "Redis", "Celery", "AWS"],
+            link: "https://apparelte.com/",
+          },
+        },
+        {
+          role: "Freelance Developer",
+          company: "Serbest",
+          period: "2023 — 2024",
+          summary:
+            "KOBİ müşterilere uçtan uca production web uygulamaları teslim ettim; gereksinimden Vercel deploy'a kadar.",
         },
       ],
     },
-    featured: {
-      project: {
-        name: "Screenshotbeam",
-        tagline: "Screenshot SaaS",
-        description:
-          "FastAPI orchestrator + Go rendering engine. Browser pool, rate limiting, Stripe billing.",
-        caseStudy: [
-          "Playwright ~200MB/instance ve render başına ~2s cold start alıyordu.",
-          "Go (Fiber + go-rod) ve pre-warmed browser pool ile değiştirdim.",
-          "Sonuç: ~50MB idle bellek, istek başına ~2s tasarruf, SSRF koruması, 4 kademeli rate limiting.",
-        ],
-        metric: "%75 bellek azaltma (200MB → 50MB idle)",
-        stack: ["Go", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
-        link: "https://www.screenshotbeam.com/",
-        github: "https://github.com/onurmacit/screenshot-api",
-        links: [{ label: "Kaynak Kod", url: "https://github.com/onurmacit/screenshot-api" }],
-      },
-    },
-    timeline: {
-      heading: "Arka Plan",
+    projects: {
+      heading: "Projeler",
       items: [
-        { role: "Backend Developer", company: "Vyrin Lab", period: "2024 — Günümüz" },
-        { role: "Freelance Developer", company: "Serbest", period: "2023 — 2024" },
+        {
+          name: "Screenshotbeam",
+          tagline: "Screenshot SaaS",
+          description:
+            "FastAPI orchestrator + Go rendering engine. Browser pool, rate limiting, Stripe billing.",
+          caseStudy: [
+            "Playwright ~200MB/instance ve render başına ~2s cold start alıyordu.",
+            "Go (Fiber + go-rod) ve pre-warmed browser pool ile değiştirdim.",
+            "Sonuç: ~50MB idle bellek, istek başına ~2s tasarruf, SSRF koruması, 4 kademeli rate limiting.",
+          ],
+          metric: "%75 bellek azaltma (200MB → 50MB idle)",
+          stack: ["Go", "FastAPI", "PostgreSQL", "Redis", "Docker", "Stripe"],
+          link: "https://www.screenshotbeam.com/",
+          github: "https://github.com/onurmacit/screenshot-api",
+          links: [{ label: "Kaynak Kod", url: "https://github.com/onurmacit/screenshot-api" }],
+        },
       ],
     },
     writing: {

@@ -1,5 +1,5 @@
 import { Nav } from "@/components/Nav";
-import { Hero, Work, Writing, Contact, Footer } from "@/components/Sections";
+import { Hero, Experience, Projects, Writing, Contact, Footer } from "@/components/Sections";
 
 export default function Home() {
   return (
@@ -7,7 +7,8 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
-        <Work />
+        <Experience />
+        <Projects />
         <Writing />
         <Contact />
       </main>
