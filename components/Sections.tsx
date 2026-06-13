@@ -3,7 +3,7 @@
 import { useLanguage } from "./LanguageProvider";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
-import type { Project } from "@/lib/content";
+import type { Project, ProjectStory } from "@/lib/content";
 
 const SECTION = "mx-auto max-w-3xl px-6 py-16";
 
@@ -201,24 +201,10 @@ function ProjectBlock({
         )}
       </div>
       {project.tagline && <p className="mt-1 text-sm text-muted">{project.tagline}</p>}
-      <p className="mt-4 leading-relaxed text-muted">{project.description}</p>
 
-      {project.caseStudy && project.caseStudy.length > 0 && (
-        <ul className="mt-5 space-y-2">
-          {project.caseStudy.map((item) => (
-            <li key={item} className="flex gap-2 text-sm leading-relaxed text-muted">
-              <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-              {item}
-            </li>
-          ))}
-        </ul>
-      )}
+      <ProjectStory story={project.story} />
 
-      {project.metric && (
-        <p className="mt-5 text-sm font-medium text-accent">{project.metric}</p>
-      )}
-
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-5 flex flex-wrap gap-2">
         {project.stack.map((tech) => (
           <Tag key={tech}>{tech}</Tag>
         ))}
@@ -240,6 +226,60 @@ function ProjectBlock({
         </div>
       )}
     </article>
+  );
+}
+
+function ProjectStory({ story }: { story: ProjectStory }) {
+  const { lang } = useLanguage();
+  const labels =
+    lang === "tr"
+      ? {
+          context: "Bağlam",
+          constraint: "Kısıt",
+          decision: "Karar",
+          outcome: "Sonuç",
+          lesson: "Production dersi",
+        }
+      : {
+          context: "Context",
+          constraint: "Constraint",
+          decision: "Decision",
+          outcome: "Outcome",
+          lesson: "Production lesson",
+        };
+
+  const layers = [
+    { key: "context", text: story.context },
+    { key: "constraint", text: story.constraint },
+    { key: "decision", text: story.decision },
+    { key: "outcome", text: story.outcome, accent: true },
+  ] as const;
+
+  return (
+    <dl className="mt-5 space-y-4">
+      {layers.map((layer) => (
+        <div key={layer.key}>
+          <dt className="text-xs font-medium uppercase tracking-widest text-subtle">
+            {labels[layer.key]}
+          </dt>
+          <dd
+            className={`mt-1.5 text-sm leading-relaxed ${
+              "accent" in layer && layer.accent ? "font-medium text-accent" : "text-muted"
+            }`}
+          >
+            {layer.text}
+          </dd>
+        </div>
+      ))}
+      {story.lesson && (
+        <div className="rounded-xl border border-line bg-white/50 px-4 py-3">
+          <dt className="text-xs font-medium uppercase tracking-widest text-subtle">
+            {labels.lesson}
+          </dt>
+          <dd className="mt-1.5 text-sm leading-relaxed text-muted">{story.lesson}</dd>
+        </div>
+      )}
+    </dl>
   );
 }
 
