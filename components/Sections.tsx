@@ -3,7 +3,7 @@
 import { useLanguage } from "./LanguageProvider";
 import { Reveal } from "./Reveal";
 import { SectionHeading } from "./SectionHeading";
-import type { ExperienceProject, Project, ProjectStory } from "@/lib/content";
+import type { ExperienceProject, Project, ProjectStory, SummaryPart } from "@/lib/content";
 
 const SECTION = "mx-auto max-w-3xl px-6 py-16";
 
@@ -67,7 +67,10 @@ export function Experience() {
                   {job.period}
                 </p>
               </div>
-              <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">{job.summary}</p>
+              <ExperienceSummary
+                summary={job.summary}
+                summaryParts={job.summaryParts}
+              />
               {job.project && (
                 <div className="mt-6">
                   <ExperienceProjectBlock project={job.project} />
@@ -167,6 +170,40 @@ export function Footer() {
         </a>
       </div>
     </footer>
+  );
+}
+
+function ExperienceSummary({
+  summary,
+  summaryParts,
+}: {
+  summary?: string;
+  summaryParts?: SummaryPart[];
+}) {
+  if (summaryParts) {
+    return (
+      <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
+        {summaryParts.map((part, index) =>
+          part.type === "text" ? (
+            <span key={index}>{part.value}</span>
+          ) : (
+            <a
+              key={index}
+              href={part.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline decoration-accent/60 underline-offset-4 transition-colors hover:text-accent"
+            >
+              {part.label}
+            </a>
+          ),
+        )}
+      </p>
+    );
+  }
+
+  return (
+    <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">{summary}</p>
   );
 }
 

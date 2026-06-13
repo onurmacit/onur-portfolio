@@ -31,11 +31,16 @@ export interface ExperienceProject {
   link?: string;
 }
 
+export type SummaryPart =
+  | { type: "text"; value: string }
+  | { type: "link"; label: string; url: string };
+
 export interface ExperienceEntry {
   role: string;
   company: string;
   period: string;
-  summary: string;
+  summary?: string;
+  summaryParts?: SummaryPart[];
   project?: ExperienceProject;
 }
 
@@ -117,8 +122,29 @@ export const content: Record<Lang, Content> = {
           role: "Freelance Developer",
           company: "Self-employed",
           period: "2023 - 2024",
-          summary:
-            "Delivered production web applications for SMB clients end to end, from requirements to deployment on Vercel.",
+          summaryParts: [
+            {
+              type: "text",
+              value:
+                "Built production web apps end to end for SMB clients, including ",
+            },
+            {
+              type: "link",
+              label: "korkmazelektrik",
+              url: "https://korkmazelektrik.com",
+            },
+            { type: "text", value: " and " },
+            {
+              type: "link",
+              label: "albayraklarotoservis",
+              url: "https://albayraklarotoservis.com",
+            },
+            {
+              type: "text",
+              value:
+                ", from requirements through deployment on their own hosting.",
+            },
+          ],
         },
       ],
     },
@@ -211,8 +237,24 @@ export const content: Record<Lang, Content> = {
           role: "Freelance Developer",
           company: "Serbest",
           period: "2023 - 2024",
-          summary:
-            "KOBİ müşterilere uçtan uca production web uygulamaları teslim ettim; gereksinimden Vercel deploy'a kadar.",
+          summaryParts: [
+            {
+              type: "link",
+              label: "korkmazelektrik",
+              url: "https://korkmazelektrik.com",
+            },
+            { type: "text", value: " ve " },
+            {
+              type: "link",
+              label: "albayraklarotoservis",
+              url: "https://albayraklarotoservis.com",
+            },
+            {
+              type: "text",
+              value:
+                " dahil KOBİ müşterilere uçtan uca production web uygulamaları teslim ettim; gereksinimden kendi hosting'lerine deploy'a kadar.",
+            },
+          ],
         },
       ],
     },
